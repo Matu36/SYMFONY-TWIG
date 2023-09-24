@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20230923230900 extends AbstractMigration
+final class Version20230924205621 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -23,7 +23,6 @@ final class Version20230923230900 extends AbstractMigration
         $this->addSql('ALTER TABLE usuarios ALTER activo DROP NOT NULL');
         $this->addSql('ALTER TABLE usuarios ALTER admin DROP NOT NULL');
         $this->addSql('ALTER TABLE usuarios ALTER created_ad DROP NOT NULL');
-        $this->addSql('ALTER TABLE portfolio RENAME COLUMN cumplea�os TO "cumpleanos"');
     }
 
     public function down(Schema $schema): void
@@ -33,6 +32,5 @@ final class Version20230923230900 extends AbstractMigration
         $this->addSql('ALTER TABLE usuarios ALTER activo DROP NOT NULL');
         $this->addSql('ALTER TABLE usuarios ALTER admin DROP NOT NULL');
         $this->addSql('ALTER TABLE usuarios ALTER created_ad DROP NOT NULL');
-        $this->addSql('ALTER TABLE portfolio RENAME COLUMN cumplea�os TO "cumpleanos"');
     }
 }

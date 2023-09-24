@@ -16,7 +16,16 @@ class RECOVER
      * @ORM\GeneratedValue(strategy="AUTO")
      * @ORM\Column(type="integer")
      */
+
+     
     private $id;
+     
+     /**
+     * @ORM\ManyToOne(targetEntity=USUARIOS::class)
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     */
+    private $usuario; // Se crea esta propiedad que es la que luego se usa en el repository;
+                      // Se hacen los metodos getter y setter
 
     /**
      * @ORM\Column(type="integer", nullable=true)
@@ -96,6 +105,16 @@ class RECOVER
     {
         $this->created_at = $created_at;
 
+        return $this;
+    }
+    public function getUsuario(): ?USUARIOS
+    {
+        return $this->usuario;
+    }
+
+    public function setUsuario(?USUARIOS $usuario): self
+    {
+        $this->usuario = $usuario;
         return $this;
     }
 }

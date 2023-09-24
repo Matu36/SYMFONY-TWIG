@@ -39,7 +39,7 @@ class USUARIOSRepository extends ServiceEntityRepository
         }
     }
 
-//    /**
+    //    /**
 //     * @return USUARIOS[] Returns an array of USUARIOS objects
 //     */
 //    public function findByExampleField($value): array
@@ -54,7 +54,7 @@ class USUARIOSRepository extends ServiceEntityRepository
 //        ;
 //    }
 
-//    public function findOneBySomeField($value): ?USUARIOS
+    //    public function findOneBySomeField($value): ?USUARIOS
 //    {
 //        return $this->createQueryBuilder('u')
 //            ->andWhere('u.exampleField = :val')
@@ -63,4 +63,13 @@ class USUARIOSRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+
+    public function findUsuarioById($id)
+    {
+        return $this->createQueryBuilder('u')
+            ->where('u.id = :id')
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
 }

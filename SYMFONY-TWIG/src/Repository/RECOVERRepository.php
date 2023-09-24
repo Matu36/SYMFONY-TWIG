@@ -6,6 +6,7 @@ use App\Entity\RECOVER;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
+
 /**
  * @extends ServiceEntityRepository<RECOVER>
  *
@@ -39,7 +40,7 @@ class RECOVERRepository extends ServiceEntityRepository
         }
     }
 
-//    /**
+    //    /**
 //     * @return RECOVER[] Returns an array of RECOVER objects
 //     */
 //    public function findByExampleField($value): array
@@ -54,7 +55,7 @@ class RECOVERRepository extends ServiceEntityRepository
 //        ;
 //    }
 
-//    public function findOneBySomeField($value): ?RECOVER
+    //    public function findOneBySomeField($value): ?RECOVER
 //    {
 //        return $this->createQueryBuilder('r')
 //            ->andWhere('r.exampleField = :val')
@@ -63,4 +64,24 @@ class RECOVERRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+    public function findRecoversWithUserData()
+    {
+        return $this->createQueryBuilder('r')
+            ->leftJoin('r.usuario', 'u') // 'usuario' es el nombre del campo de la relación en la entidad RECOVER
+            ->addSelect('u') // Incluir la entidad USUARIOS en la consulta
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function findRecoverByIdWithUserData($id)
+    {
+        return $this->createQueryBuilder('r')
+            ->leftJoin('r.usuario', 'u')
+            ->addSelect('u')
+            ->andWhere('r.id = :id')
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->getOneOrNullResult(); // Utiliza getOneOrNullResult para obtener un único resultado o null si no se encuentra
+    }
+
 }

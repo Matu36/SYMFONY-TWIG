@@ -12,6 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 class USUARIOS
 {
+
     /**
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
@@ -55,17 +56,22 @@ class USUARIOS
      * @ORM\Column(type="boolean", nullable=true)
      */
     private $admin;
-
+   
     public function __construct()
     {
         $this->activo = false; 
         $this->admin = false; 
+        
     }
 
     /**
      * @ORM\Column(type="datetime")
      */
     private $created_ad;
+
+    
+
+   
 
     public function getId(): ?int
     {

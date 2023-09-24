@@ -1,20 +1,47 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello PORTFOLIOController!{% endblock %}
+{% block title %}PORTFOLIO{% endblock %}
 
 {% block body %}
 <style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+    
 </style>
 
 <div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+   <table>
+    <thead>
+        <tr>
+            <th>Cumpleaños</th>
+            <th>Género</th>
+            <th>Country</th>
+            <th>Likes</th>
+            <th>Dislikes</th>
+            <th>Dirección</th>
+            <th>Teléfono</th>
+            <th>Email</th>
+            <th>Usuario</th>
+            <th>Sentimental</th>
+            <th>Level</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for data in portfolio %}
+        <tr>
+            <td>{{ data.cumpleanos|date('Y-m-d') }}</td>
+            <td>{{ data.genero }}</td>
+            <td>{{ data.country.nombre }}</td>
+            <td>{{ data.likes }}</td>
+            <td>{{ data.dislikes }}</td>
+            <td>{{ data.direccion }}</td>
+            <td>{{ data.telefono }}</td>
+            <td>{{ data.email }}</td>
+            <td>{{ data.usuarios.nombre }} {{ data.usuarios.apellido }}</td>
+            <td>{{ data.sentimental.nombre }}</td>
+            <td>{{ data.level.nombre }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/wamp64N/www/SYMFONY-TWIG/SYMFONY-TWIG/src/Controller/PORTFOLIOController.php'|file_link(0) }}">src/Controller/PORTFOLIOController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/wamp64N/www/SYMFONY-TWIG/SYMFONY-TWIG/templates/portfolio/index.html.twig'|file_link(0) }}">templates/portfolio/index.html.twig</a></code></li>
-    </ul>
 </div>
 {% endblock %}

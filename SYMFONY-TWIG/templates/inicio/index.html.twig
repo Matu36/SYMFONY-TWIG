@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Bienvenido
+{% endblock %}
+
+{% block body %}
+	<style>
+		body {
+			background-image: url('{{ asset('images/landing.jpg') }}');
+			background-size: cover;
+			background-repeat: no-repeat;
+
+		}
+	</style>
+
+	<div class="d-flex justify-content-end align-items-end" style="height: 100vh;">
+		<a href="{{ path('app_formulario') }}" class="btn btn-outline-info mb-3 mr-3">¿Te animás?</a>
+	</div>
+
+
+{% endblock %}

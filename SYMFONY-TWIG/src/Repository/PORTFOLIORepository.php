@@ -63,4 +63,36 @@ class PORTFOLIORepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+
+public function findAllPortfoliosWithRelations()
+    {
+        return $this->createQueryBuilder('p')
+            ->leftJoin('p.country', 'c')
+            ->addSelect('c')
+            ->leftJoin('p.usuarios', 'u')
+            ->addSelect('u')
+            ->leftJoin('p.sentimental', 's')
+            ->addSelect('s')
+            ->leftJoin('p.level', 'l')
+            ->addSelect('l')
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function findPortfolioByIdWithRelations(int $id)
+{
+    return $this->createQueryBuilder('p')
+        ->andWhere('p.id = :id')
+        ->setParameter('id', $id)
+        ->leftJoin('p.country', 'c')
+        ->addSelect('c')
+        ->leftJoin('p.usuarios', 'u')
+        ->addSelect('u')
+        ->leftJoin('p.sentimental', 's')
+        ->addSelect('s')
+        ->leftJoin('p.level', 'l')
+        ->addSelect('l')
+        ->getQuery()
+        ->getOneOrNullResult();
+}
 }

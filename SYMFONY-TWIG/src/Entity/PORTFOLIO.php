@@ -93,6 +93,32 @@ class PORTFOLIO
      */
     private $sentimental_id;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=COUNTRY::class)
+     * @ORM\JoinColumn(name="country_id", referencedColumnName="id")
+     */
+    private $country;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=USUARIOS::class)
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     */
+    private $usuarios;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=SENTIMENTAL::class)
+     * @ORM\JoinColumn(name="sentimental_id", referencedColumnName="id")
+     */
+    private $sentimental;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=LABEL::class)
+     * @ORM\JoinColumn(name="level_id", referencedColumnName="id")
+     */
+    private $level;
+
+
+
     public function getId(): ?int
     {
         return $this->id;
@@ -275,6 +301,50 @@ class PORTFOLIO
     {
         $this->sentimental_id = $sentimental_id;
 
+        return $this;
+    }
+
+    public function getCountry(): ?COUNTRY
+    {
+        return $this->country;
+    }
+
+    public function setCountry(?COUNTRY $country): self
+    {
+        $this->country = $country;
+        return $this;
+    }
+
+    public function getUsuarios(): ?USUARIOS
+    {
+        return $this->usuarios;
+    }
+
+    public function setUsuarios(?USUARIOS $usuarios): self
+    {
+        $this->usuarios = $usuarios;
+        return $this;
+    }
+
+    public function getSentimental(): ?SENTIMENTAL
+    {
+        return $this->sentimental;
+    }
+
+    public function setSentimental(?SENTIMENTAL $sentimental): self
+    {
+        $this->sentimental = $sentimental;
+        return $this;
+    }
+
+    public function getLevel(): ?LABEL
+    {
+        return $this->level;
+    }
+
+    public function setLevel(?LABEL $level): self
+    {
+        $this->level = $level;
         return $this;
     }
 }

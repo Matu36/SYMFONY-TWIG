@@ -14,7 +14,7 @@ class NOTIFICACIONES
 {
     /**
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO"
+     * @ORM\GeneratedValue(strategy="AUTO")
      * @ORM\Column(type="integer")
      */
     private $id;

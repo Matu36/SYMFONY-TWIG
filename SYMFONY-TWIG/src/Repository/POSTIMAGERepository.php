@@ -39,28 +39,52 @@ class POSTIMAGERepository extends ServiceEntityRepository
         }
     }
 
-//    /**
-//     * @return POSTIMAGE[] Returns an array of POSTIMAGE objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('p')
-//            ->andWhere('p.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('p.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    //    /**
+    //     * @return POSTIMAGE[] Returns an array of POSTIMAGE objects
+    //     */
+    //    public function findByExampleField($value): array
+    //    {
+    //        return $this->createQueryBuilder('p')
+    //            ->andWhere('p.exampleField = :val')
+    //            ->setParameter('val', $value)
+    //            ->orderBy('p.id', 'ASC')
+    //            ->setMaxResults(10)
+    //            ->getQuery()
+    //            ->getResult()
+    //        ;
+    //    }
 
-//    public function findOneBySomeField($value): ?POSTIMAGE
-//    {
-//        return $this->createQueryBuilder('p')
-//            ->andWhere('p.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+    //    public function findOneBySomeField($value): ?POSTIMAGE
+    //    {
+    //        return $this->createQueryBuilder('p')
+    //            ->andWhere('p.exampleField = :val')
+    //            ->setParameter('val', $value)
+    //            ->getQuery()
+    //            ->getOneOrNullResult()
+    //        ;
+    //    }
+
+    public function findAllPostImageWithRelations()
+    {
+        return $this->createQueryBuilder('pi')
+            ->leftJoin('pi.postPostImage', 'p')
+            ->addSelect('p')
+            ->leftJoin('pi.imagenPostImage', 'i')
+            ->addSelect('i')
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function findPostImageByIdWithRelations(int $id)
+    {
+        return $this->createQueryBuilder('pi')
+            ->andWhere('pi.id = :id')
+            ->setParameter('id', $id)
+            ->leftJoin('pi.postPostImage', 'p')
+            ->addSelect('p')
+            ->leftJoin('pi.imagenPostImage', 'i')
+            ->addSelect('i')
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
 }

@@ -39,28 +39,52 @@ class CONVERSACIONESRepository extends ServiceEntityRepository
         }
     }
 
-//    /**
-//     * @return CONVERSACIONES[] Returns an array of CONVERSACIONES objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('c')
-//            ->andWhere('c.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('c.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    //    /**
+    //     * @return CONVERSACIONES[] Returns an array of CONVERSACIONES objects
+    //     */
+    //    public function findByExampleField($value): array
+    //    {
+    //        return $this->createQueryBuilder('c')
+    //            ->andWhere('c.exampleField = :val')
+    //            ->setParameter('val', $value)
+    //            ->orderBy('c.id', 'ASC')
+    //            ->setMaxResults(10)
+    //            ->getQuery()
+    //            ->getResult()
+    //        ;
+    //    }
 
-//    public function findOneBySomeField($value): ?CONVERSACIONES
-//    {
-//        return $this->createQueryBuilder('c')
-//            ->andWhere('c.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+    //    public function findOneBySomeField($value): ?CONVERSACIONES
+    //    {
+    //        return $this->createQueryBuilder('c')
+    //            ->andWhere('c.exampleField = :val')
+    //            ->setParameter('val', $value)
+    //            ->getQuery()
+    //            ->getOneOrNullResult()
+    //        ;
+    //    }
+
+    public function findAllConversacionWithRelations()
+    {
+        return $this->createQueryBuilder('con')
+            ->leftJoin('con.usuariosSenderConversation', 'u')
+            ->addSelect('u')
+            ->leftJoin('con.usuariosReceptorConversation', 'u')
+            ->addSelect('u')
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function findConversacionByIdWithRelations(int $id)
+    {
+        return $this->createQueryBuilder('con')
+            ->andWhere('con.id = :id')
+            ->setParameter('id', $id)
+            ->leftJoin('con.usuariosSenderConversation', 'u')
+            ->addSelect('u')
+            ->leftJoin('con.usuariosReceptorConversation', 'u')
+            ->addSelect('u')
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
 }

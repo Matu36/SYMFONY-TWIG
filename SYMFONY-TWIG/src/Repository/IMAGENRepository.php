@@ -39,28 +39,56 @@ class IMAGENRepository extends ServiceEntityRepository
         }
     }
 
-//    /**
-//     * @return IMAGEN[] Returns an array of IMAGEN objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('i')
-//            ->andWhere('i.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('i.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    //    /**
+    //     * @return IMAGEN[] Returns an array of IMAGEN objects
+    //     */
+    //    public function findByExampleField($value): array
+    //    {
+    //        return $this->createQueryBuilder('i')
+    //            ->andWhere('i.exampleField = :val')
+    //            ->setParameter('val', $value)
+    //            ->orderBy('i.id', 'ASC')
+    //            ->setMaxResults(10)
+    //            ->getQuery()
+    //            ->getResult()
+    //        ;
+    //    }
 
-//    public function findOneBySomeField($value): ?IMAGEN
-//    {
-//        return $this->createQueryBuilder('i')
-//            ->andWhere('i.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+    //    public function findOneBySomeField($value): ?IMAGEN
+    //    {
+    //        return $this->createQueryBuilder('i')
+    //            ->andWhere('i.exampleField = :val')
+    //            ->setParameter('val', $value)
+    //            ->getQuery()
+    //            ->getOneOrNullResult()
+    //        ;
+    //    }
+
+    public function findAllImagenWithRelations()
+    {
+        return $this->createQueryBuilder('i')
+            ->leftJoin('i.usuariosImagen', 'u')
+            ->addSelect('u')
+            ->leftJoin('i.levelImagen', 'l')
+            ->addSelect('l')
+            ->leftJoin('i.albumImagen', 'a')
+            ->addSelect('a')
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function findImagenByIdWithRelations(int $id)
+    {
+        return $this->createQueryBuilder('i')
+            ->andWhere('i.id = :id')
+            ->setParameter('id', $id)
+            ->leftJoin('i.usuariosImagen', 'u')
+            ->addSelect('u')
+            ->leftJoin('i.levelImagen', 'l')
+            ->addSelect('l')
+            ->leftJoin('i.albumImagen', 'a')
+            ->addSelect('a')
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
 }

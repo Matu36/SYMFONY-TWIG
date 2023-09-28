@@ -39,28 +39,52 @@ class COMENTARIOSRepository extends ServiceEntityRepository
         }
     }
 
-//    /**
-//     * @return COMENTARIOS[] Returns an array of COMENTARIOS objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('c')
-//            ->andWhere('c.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('c.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    //    /**
+    //     * @return COMENTARIOS[] Returns an array of COMENTARIOS objects
+    //     */
+    //    public function findByExampleField($value): array
+    //    {
+    //        return $this->createQueryBuilder('c')
+    //            ->andWhere('c.exampleField = :val')
+    //            ->setParameter('val', $value)
+    //            ->orderBy('c.id', 'ASC')
+    //            ->setMaxResults(10)
+    //            ->getQuery()
+    //            ->getResult()
+    //        ;
+    //    }
 
-//    public function findOneBySomeField($value): ?COMENTARIOS
-//    {
-//        return $this->createQueryBuilder('c')
-//            ->andWhere('c.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+    //    public function findOneBySomeField($value): ?COMENTARIOS
+    //    {
+    //        return $this->createQueryBuilder('c')
+    //            ->andWhere('c.exampleField = :val')
+    //            ->setParameter('val', $value)
+    //            ->getQuery()
+    //            ->getOneOrNullResult()
+    //        ;
+    //    }
+
+    public function findAllCorazonWithRelations()
+    {
+        return $this->createQueryBuilder('com')
+            ->leftJoin('com.usuariosComentarios', 'u')
+            ->addSelect('u')
+            ->leftJoin('com.comentariosComentarios', 'c')
+            ->addSelect('c')
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function findCorazonByIdWithRelations(int $id)
+    {
+        return $this->createQueryBuilder('com')
+            ->andWhere('com.id = :id')
+            ->setParameter('id', $id)
+            ->leftJoin('com.usuariosComentarios', 'u')
+            ->addSelect('u')
+            ->leftJoin('com.comentariosComentarios', 'c')
+            ->addSelect('c')
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
 }

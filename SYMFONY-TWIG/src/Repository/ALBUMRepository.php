@@ -63,4 +63,29 @@ class ALBUMRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+
+public function findAllAlbumWithRelations()
+    {
+        return $this->createQueryBuilder('a')
+            ->leftJoin('a.usuariosAlbum', 'u')
+            ->addSelect('u')
+            ->leftJoin('a.levelAlbum', 'l')
+            ->addSelect('l')
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function findAlbumByIdWithRelations(int $id)
+{
+    return $this->createQueryBuilder('a')
+        ->andWhere('a.id = :id')
+        ->setParameter('id', $id)
+        ->leftJoin('a.usuariosAlbum', 'u')
+        ->addSelect('u')
+        ->leftJoin('a.levelAlbum', 'l')
+        ->addSelect('l')
+        ->getQuery()
+        ->getOneOrNullResult();
+}
+
 }

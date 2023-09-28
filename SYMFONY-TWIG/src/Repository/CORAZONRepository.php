@@ -39,28 +39,48 @@ class CORAZONRepository extends ServiceEntityRepository
         }
     }
 
-//    /**
-//     * @return CORAZON[] Returns an array of CORAZON objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('c')
-//            ->andWhere('c.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('c.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    //    /**
+    //     * @return CORAZON[] Returns an array of CORAZON objects
+    //     */
+    //    public function findByExampleField($value): array
+    //    {
+    //        return $this->createQueryBuilder('c')
+    //            ->andWhere('c.exampleField = :val')
+    //            ->setParameter('val', $value)
+    //            ->orderBy('c.id', 'ASC')
+    //            ->setMaxResults(10)
+    //            ->getQuery()
+    //            ->getResult()
+    //        ;
+    //    }
 
-//    public function findOneBySomeField($value): ?CORAZON
-//    {
-//        return $this->createQueryBuilder('c')
-//            ->andWhere('c.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+    //    public function findOneBySomeField($value): ?CORAZON
+    //    {
+    //        return $this->createQueryBuilder('c')
+    //            ->andWhere('c.exampleField = :val')
+    //            ->setParameter('val', $value)
+    //            ->getQuery()
+    //            ->getOneOrNullResult()
+    //        ;
+    //    }
+
+    public function findAllCorazonWithRelations()
+    {
+        return $this->createQueryBuilder('c')
+            ->leftJoin('c.usuariosCorazon', 'u')
+            ->addSelect('u')
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function findCorazonByIdWithRelations(int $id)
+    {
+        return $this->createQueryBuilder('c')
+            ->andWhere('c.id = :id')
+            ->setParameter('id', $id)
+            ->leftJoin('c.usuariosCorazon', 'u')
+            ->addSelect('u')
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
 }

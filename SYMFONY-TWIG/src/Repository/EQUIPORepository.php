@@ -63,4 +63,25 @@ class EQUIPORepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+
+public function findAllEquipoWithRelations()
+{
+    return $this->createQueryBuilder('e')
+        ->leftJoin('e.usuariosEquipo', 'u')
+        ->addSelect('u')
+        ->getQuery()
+        ->getResult();
 }
+
+public function findEequipoByIdWithRelations(int $id)
+{
+    return $this->createQueryBuilder('e')
+        ->andWhere('e.id = :id')
+        ->setParameter('id', $id)
+        ->leftJoin('e.usuariosEquipo', 'u')
+        ->addSelect('u')
+        ->getQuery()
+        ->getOneOrNullResult();
+}
+}
+

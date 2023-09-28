@@ -39,28 +39,52 @@ class NOTIFICACIONESRepository extends ServiceEntityRepository
         }
     }
 
-//    /**
-//     * @return NOTIFICACIONES[] Returns an array of NOTIFICACIONES objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('n')
-//            ->andWhere('n.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('n.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    //    /**
+    //     * @return NOTIFICACIONES[] Returns an array of NOTIFICACIONES objects
+    //     */
+    //    public function findByExampleField($value): array
+    //    {
+    //        return $this->createQueryBuilder('n')
+    //            ->andWhere('n.exampleField = :val')
+    //            ->setParameter('val', $value)
+    //            ->orderBy('n.id', 'ASC')
+    //            ->setMaxResults(10)
+    //            ->getQuery()
+    //            ->getResult()
+    //        ;
+    //    }
 
-//    public function findOneBySomeField($value): ?NOTIFICACIONES
-//    {
-//        return $this->createQueryBuilder('n')
-//            ->andWhere('n.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+    //    public function findOneBySomeField($value): ?NOTIFICACIONES
+    //    {
+    //        return $this->createQueryBuilder('n')
+    //            ->andWhere('n.exampleField = :val')
+    //            ->setParameter('val', $value)
+    //            ->getQuery()
+    //            ->getOneOrNullResult()
+    //        ;
+    //    }
+
+    public function findAllNotificacionesWithRelations()
+    {
+        return $this->createQueryBuilder('n')
+            ->leftJoin('n.usuariosSenderNotificacion', 'u')
+            ->addSelect('u')
+            ->leftJoin('n.usuariosReceptorNotificacion', 'u')
+            ->addSelect('u')
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function findNotificacionesByIdWithRelations(int $id)
+    {
+        return $this->createQueryBuilder('c')
+            ->andWhere('n.id = :id')
+            ->setParameter('id', $id)
+            ->leftJoin('n.usuariosSenderNotificacion', 'u')
+            ->addSelect('u')
+            ->leftJoin('n.usuariosReceptorNotificacion', 'u')
+            ->addSelect('u')
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
 }

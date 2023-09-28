@@ -39,28 +39,52 @@ class AMIGOSRepository extends ServiceEntityRepository
         }
     }
 
-//    /**
-//     * @return AMIGOS[] Returns an array of AMIGOS objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('a')
-//            ->andWhere('a.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('a.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    //    /**
+    //     * @return AMIGOS[] Returns an array of AMIGOS objects
+    //     */
+    //    public function findByExampleField($value): array
+    //    {
+    //        return $this->createQueryBuilder('a')
+    //            ->andWhere('a.exampleField = :val')
+    //            ->setParameter('val', $value)
+    //            ->orderBy('a.id', 'ASC')
+    //            ->setMaxResults(10)
+    //            ->getQuery()
+    //            ->getResult()
+    //        ;
+    //    }
 
-//    public function findOneBySomeField($value): ?AMIGOS
-//    {
-//        return $this->createQueryBuilder('a')
-//            ->andWhere('a.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+    //    public function findOneBySomeField($value): ?AMIGOS
+    //    {
+    //        return $this->createQueryBuilder('a')
+    //            ->andWhere('a.exampleField = :val')
+    //            ->setParameter('val', $value)
+    //            ->getQuery()
+    //            ->getOneOrNullResult()
+    //        ;
+    //    }
+
+    public function findAllAmigosWithRelations()
+    {
+        return $this->createQueryBuilder('a')
+            ->leftJoin('a.usuariosSenderAmigos', 'u')
+            ->addSelect('u')
+            ->leftJoin('a.usuariosReceptorAmigos', 'u')
+            ->addSelect('u')
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function findAmigosByIdWithRelations(int $id)
+    {
+        return $this->createQueryBuilder('a')
+            ->andWhere('a.id = :id')
+            ->setParameter('id', $id)
+            ->leftJoin('a.usuariosSenderAmigos', 'u')
+            ->addSelect('u')
+            ->leftJoin('a.usuariosReceptorAmigos', 'u')
+            ->addSelect('u')
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
 }

@@ -49,6 +49,18 @@ class AMIGOS
      */
     private $created_at;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=USUARIOS::class)
+     * @ORM\JoinColumn(name="sender_id", referencedColumnName="id")
+     */
+    private $usuariosSenderAmigos;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=USUARIOS::class)
+     * @ORM\JoinColumn(name="receptor_id", referencedColumnName="id")
+     */
+    private $usuariosReceptorAmigos;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -113,4 +125,36 @@ class AMIGOS
 
         return $this;
     }
+
+    public function getUsuariosSenderAmigos(): ?USUARIOS
+    {
+        return $this->usuariosSenderAmigos;
+    }
+
+    public function setUsuariosSenderAmigos(?USUARIOS $usuariosSenderAmigos): self
+    {
+        $this->usuariosSenderAmigos = $usuariosSenderAmigos;
+        return $this;
+    }
+
+    public function getUsuariosReceptorAmigos(): ?USUARIOS
+    {
+        return $this->usuariosReceptorAmigos;
+    }
+
+    public function setUsuariosReceptorAmigos(?USUARIOS $usuariosReceptorAmigos): self
+    {
+        $this->usuariosReceptorAmigos = $usuariosReceptorAmigos;
+        return $this;
+    }
 }
+
+
+// Sirve para guardar las solicitudes de amistad y amigos.
+
+// id: Llave primaria
+// sender_id: Usuario que envía la solicitud de amistad
+// receptor_id: Usuario que recibe la solicitud
+// is_accepted: Una vez que el usuario acepta entonces ya son amigos
+// is_readed: Si el usuario que recibe lee la solicitud
+// created_at: Fecha de creacion

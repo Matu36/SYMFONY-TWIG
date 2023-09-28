@@ -28,6 +28,18 @@ class POSTIMAGE
      */
     private $image_id;
 
+     /**
+     * @ORM\ManyToOne(targetEntity=POST::class)
+     * @ORM\JoinColumn(name="post_id", referencedColumnName="id")
+     */
+    private $postPostImage;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=IMAGEN::class)
+     * @ORM\JoinColumn(name="image_id", referencedColumnName="id")
+     */
+    private $imagenPostImage;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -56,4 +68,32 @@ class POSTIMAGE
 
         return $this;
     }
+
+    public function getpostPostImage(): ?POST
+    {
+        return $this->postPostImage;
+    }
+
+    public function setPostPostImage(?POST $postPostImage): self
+    {
+        $this->postPostImage = $postPostImage;
+        return $this;
+    }
+
+    public function getImagenPostImage(): ?IMAGEN
+    {
+        return $this->imagenPostImage;
+    }
+
+    public function setImagenPostImage(?IMAGEN $imagenPostImage): self
+    {
+        $this->imagenPostImage = $imagenPostImage;
+        return $this;
+    }
 }
+
+
+// Sirve para relacionar un post con una imagen o mas.
+
+// post_id: Id de la publicación
+// image_id: Id de la imagen

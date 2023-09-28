@@ -97,25 +97,25 @@ class PORTFOLIO
      * @ORM\ManyToOne(targetEntity=COUNTRY::class)
      * @ORM\JoinColumn(name="country_id", referencedColumnName="id")
      */
-    private $country;
+    private $countryPortfolio;
 
     /**
      * @ORM\ManyToOne(targetEntity=USUARIOS::class)
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
-    private $usuarios;
+    private $usuariosPortfolio;
 
     /**
      * @ORM\ManyToOne(targetEntity=SENTIMENTAL::class)
      * @ORM\JoinColumn(name="sentimental_id", referencedColumnName="id")
      */
-    private $sentimental;
+    private $sentimentalPortfolio;
 
     /**
      * @ORM\ManyToOne(targetEntity=LABEL::class)
      * @ORM\JoinColumn(name="level_id", referencedColumnName="id")
      */
-    private $level;
+    private $levelPortfolio;
 
 
 
@@ -304,47 +304,68 @@ class PORTFOLIO
         return $this;
     }
 
-    public function getCountry(): ?COUNTRY
+    public function getCountryPortfolio(): ?COUNTRY
     {
-        return $this->country;
+        return $this->countryPortfolio;
     }
 
-    public function setCountry(?COUNTRY $country): self
+    public function setCountryPortfolio(?COUNTRY $countryPortfolio): self
     {
-        $this->country = $country;
+        $this->countryPortfolio = $countryPortfolio;
         return $this;
     }
 
-    public function getUsuarios(): ?USUARIOS
+    public function getUsuariosPortfolio(): ?USUARIOS
     {
-        return $this->usuarios;
+        return $this->usuariosPortfolio;
     }
 
-    public function setUsuarios(?USUARIOS $usuarios): self
+    public function setUsuariosPortfolio(?USUARIOS $usuariosPortfolio): self
     {
-        $this->usuarios = $usuarios;
+        $this->usuariosPortfolio = $usuariosPortfolio;
         return $this;
     }
 
-    public function getSentimental(): ?SENTIMENTAL
+    public function getSentimentalPortfolio(): ?SENTIMENTAL
     {
-        return $this->sentimental;
+        return $this->sentimentalPortfolio;
     }
 
-    public function setSentimental(?SENTIMENTAL $sentimental): self
+    public function setSentimentalPortfolio(?SENTIMENTAL $sentimentalPortfolio): self
     {
-        $this->sentimental = $sentimental;
+        $this->sentimentalPortfolio = $sentimentalPortfolio;
         return $this;
     }
 
-    public function getLevel(): ?LABEL
+    public function getLevelPortfolio(): ?LABEL
     {
-        return $this->level;
+        return $this->levelPortfolio;
     }
 
-    public function setLevel(?LABEL $level): self
+    public function setLevelPortfolio(?LABEL $levelPortfolio): self
     {
-        $this->level = $level;
+        $this->levelPortfolio = $levelPortfolio;
         return $this;
     }
 }
+
+
+
+
+// Almacena información extendida sobre el perfil del usuario.
+
+// day_of_birth: Fecha de nacimiento
+// gender: Genero, hombre, mujer, otro, etc..
+// country_id: Id del pais desde la tabla “country”
+// image: Imagen de perfil
+// image_header: Imagen de cabecera
+// title: Titulo del perfil
+// bio: Descripción o biografia del perfil
+// likes: Cosas que te gustan
+// dislikes: Cosas que no te gustan
+// address: Dirección o domicilio
+// phone: Numero de telefono
+// public_email: Email publico
+// user_id: Id del usuario desde la tabla “user”
+// level_id: Quien puede ver tu perfil desde la tabla “level”
+// sentimental_id: Situación sentimental desde la tabla “sentimental”

@@ -23,6 +23,8 @@ class CORAZON
      */
     private $type_id;
 
+
+
     public function __construct()
     {
         $this->type_id = false; 
@@ -42,6 +44,12 @@ class CORAZON
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $created_at;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=USUARIOS::class)
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     */
+    private $usuariosCorazon;
 
     public function getId(): ?int
     {
@@ -95,4 +103,25 @@ class CORAZON
 
         return $this;
     }
+
+    public function getUsuariosCorazon(): ?USUARIOS
+    {
+        return $this->usuariosCorazon;
+    }
+
+    public function setUsuariosCorazon(?USUARIOS $usuariosCorazon): self
+    {
+        $this->usuariosCorazon = $usuariosCorazon;
+        return $this;
+    }
 }
+
+
+// Sirve para guardar los “Me gusta” de las publicaciones. No se pude usar la palabra “like” para el nombre de la tabla por que “like” es un comando SQL.
+
+// id: Llave primaria
+// type_id: Tipo, si es para posts, imágenes, albums etc.
+// ref_id: El id del del post, imagen o album segun el caso.
+// user_id: El id del usuario que crea el “me gusta”
+// created_at: Fecha de creación de el “me gusta”
+

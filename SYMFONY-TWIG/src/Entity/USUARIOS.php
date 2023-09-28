@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\USUARIOSRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=USUARIOSRepository::class)
@@ -32,6 +33,7 @@ class USUARIOS
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Unique
      */
     private $email;
 
@@ -61,7 +63,6 @@ class USUARIOS
     {
         $this->activo = false; 
         $this->admin = false; 
-        
     }
 
     /**
@@ -70,8 +71,6 @@ class USUARIOS
     private $created_ad;
 
     
-
-   
 
     public function getId(): ?int
     {
@@ -174,3 +173,18 @@ class USUARIOS
         return $this;
     }
 }
+
+
+// La tabla user es la tabla principal del sistema, ya que cada usuario corresponde una cuenta y todos las las acciones 
+// se relacionan con el usuario desde publicar, comentar, hasta las notificaciones, etc..
+
+// id: es la llave primaria auto incremental de la tabla (La mayoría de las tablas incluyen su ID para ser relacionadas con otras tablas)
+// name: Nombre real del usuario
+// lastname: Apellidos del usuario
+// username: Nombre de usuario para inciar sesión
+// email: Correo para iniciar sesión y para recibir notificaciones
+// password: Contraseña
+// code: Código de recuperación
+// is_active: Si el usuario esta activo
+// is_admin: Si el usuario es administrador
+// created_at: Fecha de creación automática por el sistema.

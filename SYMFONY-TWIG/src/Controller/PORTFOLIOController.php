@@ -45,9 +45,9 @@ public function getPortfolioById(int $id, PORTFOLIORepository $portfolioReposito
         return new JsonResponse($json, 200, [], true);
     }
 
-    // Renderiza una vista Twig con los mismos datos
+    
     return $this->render('portfolio/index.html.twig', [
-        'portfolio' => [$portfolio], // Pasa $portfolio como un array
+        'portfolio' => [$portfolio], 
     ]);
 }
 

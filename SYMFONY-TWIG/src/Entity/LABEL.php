@@ -40,3 +40,13 @@ class LABEL
         return $this;
     }
 }
+
+
+
+
+// La tabla level sirve para guardar los 
+// niveles de distribución de las publicaciones, por ejemplo las publicaciones publicas 
+// las pueden ver todos aunque no sean amigos, Amigos: solo mis amigos, Amigos de mis amigos…
+
+// id: Llave primaria
+// name: Nombre o texto

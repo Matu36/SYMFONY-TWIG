@@ -53,6 +53,26 @@ class IMAGEN
      */
     private $created_at;
 
+
+    /**
+     * @ORM\ManyToOne(targetEntity=ALBUM::class)
+     * @ORM\JoinColumn(name="album_id", referencedColumnName="id")
+     */
+    private $albumImagen;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=USUARIOS::class)
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     */
+    private $usuariosImagen;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=LABEL::class)
+     * @ORM\JoinColumn(name="level_id", referencedColumnName="id")
+     */
+    private $levelImagen;
+
+
     public function getId(): ?int
     {
         return $this->id;
@@ -141,4 +161,48 @@ class IMAGEN
 
         return $this;
     }
+
+    public function getUsuariosImagen(): ?USUARIOS
+    {
+        return $this->usuariosImagen;
+    }
+
+    public function setUsuariosImagen(?USUARIOS $usuariosImagen): self
+    {
+        $this->usuariosImagen = $usuariosImagen;
+        return $this;
+    }
+
+    public function getLevelImagen(): ?LABEL
+    {
+        return $this->levelImagen;
+    }
+
+    public function setLevelImagen(?LABEL $levelImagen): self
+    {
+        $this->levelImagen = $levelImagen;
+        return $this;
+    }
+    public function getAlbumImagen(): ?ALBUM
+    {
+        return $this->albumImagen;
+    }
+
+    public function setAlbumImagen(?ALBUM $albumImagen): self
+    {
+        $this->albumImagen = $albumImagen;
+        return $this;
+    }
 }
+
+
+// Sirve para guardar las imágenes  y su información.
+
+// id: Llave primaria
+// src: Nombre del archivo de imagen
+// title: Titulo de la imagen
+// content: Descripción de la imagen
+// user_id: Id del usuario propietario de la imagen
+// level_id: quien puede ver la imagen
+// album_id: Si la imagen pertenece a un album, se guarda el id del album.
+// created_at: Fecha de creación

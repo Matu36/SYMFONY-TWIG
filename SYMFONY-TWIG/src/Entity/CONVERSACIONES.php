@@ -33,6 +33,19 @@ class CONVERSACIONES
      */
     private $created_at;
 
+
+    /**
+     * @ORM\ManyToOne(targetEntity=USUARIOS::class)
+     * @ORM\JoinColumn(name="sender_id", referencedColumnName="id")
+     */
+    private $usuariosSenderConversation;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=USUARIOS::class)
+     * @ORM\JoinColumn(name="receptor_id", referencedColumnName="id")
+     */
+    private $usuariosReceptorConversation;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -73,4 +86,32 @@ class CONVERSACIONES
 
         return $this;
     }
+    public function getUsuariosSenderConversation(): ?USUARIOS
+    {
+        return $this->usuariosSenderConversation;
+    }
+
+    public function setUsuariosSenderConversation(?USUARIOS $usuariosSenderConversation): self
+    {
+        $this->usuariosSenderConversation = $usuariosSenderConversation;
+        return $this;
+    }
+    public function getUsuariosReceptorConversation(): ?USUARIOS
+    {
+        return $this->usuariosReceptorConversation;
+    }
+
+    public function setUsuariosReceptorConversation(?USUARIOS $usuariosReceptorConversation): self
+    {
+        $this->usuariosReceptorConversation = $usuariosReceptorConversation;
+        return $this;
+    }
 }
+
+
+// Sirve para crear las conversaciones entre usuarios.
+
+// id: Llave primaria
+// sender_id: Usuario que envía la solicitud de conversación
+// receptor_id: Usuario que recibe la solicitud
+// created_at: Fecha de creación

@@ -48,6 +48,12 @@ class EQUIPO
      */
     private $created_at;
 
+     /**
+     * @ORM\ManyToOne(targetEntity=USUARIOS::class)
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     */
+    private $usuariosEquipo;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -124,4 +130,26 @@ class EQUIPO
 
         return $this;
     }
+
+    public function getUsuariosEquipo(): ?USUARIOS
+    {
+        return $this->usuariosEquipo;
+    }
+
+    public function setUsuariosEquipo(?USUARIOS $usuariosEquipo): self
+    {
+        $this->usuariosEquipo = $usuariosEquipo;
+        return $this;
+    }
 }
+
+
+// Sirve para crear grupos y compartir información. No se puede usar la palabra “group” por que esta reservada por MySQL.
+
+// d: Llave primaria
+// image: Imagen del grupo
+// title: Titulo del grupo
+// description: Descripcion del grupo
+// user_id: Propietario del grupo
+// status: Estado del grupo
+// created_at: fecha de creación

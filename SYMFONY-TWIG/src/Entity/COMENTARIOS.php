@@ -48,6 +48,18 @@ class COMENTARIOS
      */
     private $created_at;
 
+     /**
+     * @ORM\ManyToOne(targetEntity=USUARIOS::class)
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     */
+    private $usuariosComentarios;
+
+     /**
+     * @ORM\ManyToOne(targetEntity=COMENTARIOS::class)
+     * @ORM\JoinColumn(name="comentarios_id", referencedColumnName="id")
+     */
+    private $comentariosComentarios;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -124,4 +136,37 @@ class COMENTARIOS
 
         return $this;
     }
+
+    public function getUsuariosComentarios(): ?USUARIOS
+    {
+        return $this->usuariosComentarios;
+    }
+
+    public function setUsuariosComentarios(?USUARIOS $usuariosComentarios): self
+    {
+        $this->usuariosComentarios = $usuariosComentarios;
+        return $this;
+    }
+
+    public function getComentariosComentarios(): ?COMENTARIOS
+    {
+        return $this->comentariosComentarios;
+    }
+
+    public function setComentarios(?COMENTARIOS $comentariosComentarios): self
+    {
+        $this->comentariosComentarios = $comentariosComentarios;
+        return $this;
+    }
 }
+
+
+// Sirve para guardar los comentarios de los posts, imágenes, etc.
+
+// id: Llave primaria
+// type_id: Tipo, si es para posts, imágenes, albums etc.
+// ref_id: El id del del post, imagen o album según el caso.
+// user_id: El id del usuario que crea el comentario
+// content: Contenido del comentario
+// comment_id: Si es un comentario de otro comentario, se guarda el id del comentario superior
+// created_at: Fecha de creación

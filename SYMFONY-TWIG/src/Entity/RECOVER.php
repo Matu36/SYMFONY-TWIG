@@ -24,8 +24,8 @@ class RECOVER
      * @ORM\ManyToOne(targetEntity=USUARIOS::class)
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
-    private $usuario; // Se crea esta propiedad que es la que luego se usa en el repository;
-                      // Se hacen los metodos getter y setter
+    private $usuarioRecover; // Se crea esta propiedad que es la que luego se usa en el repository;
+                             // Se hacen los metodos getter y setter
 
     /**
      * @ORM\Column(type="integer", nullable=true)
@@ -107,14 +107,23 @@ class RECOVER
 
         return $this;
     }
-    public function getUsuario(): ?USUARIOS
+    public function getUsuarioRecover(): ?USUARIOS
     {
-        return $this->usuario;
+        return $this->usuarioRecover;
     }
 
-    public function setUsuario(?USUARIOS $usuario): self
+    public function setUsuarioRecover(?USUARIOS $usuarioRecover): self
     {
-        $this->usuario = $usuario;
+        $this->usuarioRecover = $usuarioRecover;
         return $this;
     }
 }
+
+
+// La tabla recover sirve para almacenar los datos cuando el usuario intenta recuperar su contraseña.
+
+// id: Llave primaria
+// user_id: El id del usuario que solicita la recuperación
+// code: Codigo generado aleatoriamente
+// is_used: Si el codigo ya esta usado, si esta usado ya no se puede user de nuevo
+// created_at: Fecha de creación o de solicitud

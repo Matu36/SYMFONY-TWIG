@@ -40,3 +40,10 @@ class SENTIMENTAL
         return $this;
     }
 }
+
+
+// Almacena los tipos de relaciones o 
+// estado de las relaciones: Soltero, casado, divorciado, es complicado …
+
+// d: Llave primaria
+// name: Nombre que se muestra

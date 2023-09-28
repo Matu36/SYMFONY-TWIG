@@ -67,8 +67,8 @@ class RECOVERRepository extends ServiceEntityRepository
     public function findRecoversWithUserData()
     {
         return $this->createQueryBuilder('r')
-            ->leftJoin('r.usuario', 'u') // 'usuario' es el nombre del campo de la relación en la entidad RECOVER
-            ->addSelect('u') // Incluir la entidad USUARIOS en la consulta
+            ->leftJoin('r.usuarioRecover', 'u') // 'usuarioRecover' es el nombre del campo de la relación en la entidad RECOVER
+            ->addSelect('u')                    // Incluir la entidad USUARIOS en la consulta
             ->getQuery()
             ->getResult();
     }
@@ -76,7 +76,7 @@ class RECOVERRepository extends ServiceEntityRepository
     public function findRecoverByIdWithUserData($id)
     {
         return $this->createQueryBuilder('r')
-            ->leftJoin('r.usuario', 'u')
+            ->leftJoin('r.usuarioRecover', 'u')
             ->addSelect('u')
             ->andWhere('r.id = :id')
             ->setParameter('id', $id)

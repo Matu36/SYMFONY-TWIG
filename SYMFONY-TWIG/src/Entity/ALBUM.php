@@ -43,6 +43,18 @@ class ALBUM
      */
     private $created_at;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=USUARIOS::class)
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     */
+    private $usuariosAlbum;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=LABEL::class)
+     * @ORM\JoinColumn(name="level_id", referencedColumnName="id")
+     */
+    private $levelAlbum;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -107,4 +119,35 @@ class ALBUM
 
         return $this;
     }
+    public function getUsuariosAlbum(): ?USUARIOS
+    {
+        return $this->usuariosAlbum;
+    }
+
+    public function setUsuariosAlbum(?USUARIOS $usuariosAlbum): self
+    {
+        $this->usuariosAlbum = $usuariosAlbum;
+        return $this;
+    }
+
+    public function getLevelAlbum(): ?LABEL
+    {
+        return $this->levelAlbum;
+    }
+
+    public function setLevelAlbum(?LABEL $levelAlbum): self
+    {
+        $this->levelAlbum = $levelAlbum;
+        return $this;
+    }
 }
+
+
+// Sirve para crear albums de imagenes.
+
+// id: Llave primaria
+// title: Titulo del album
+// content: Descripción del album
+// user_id: Id del usuario propietario del album
+// level_id: Nivel de permiso o distribución del album
+// created_at: Fecha de creación

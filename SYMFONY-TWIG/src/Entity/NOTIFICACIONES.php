@@ -49,9 +49,21 @@ class NOTIFICACIONES
      */
     private $is_readed;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=USUARIOS::class)
+     * @ORM\JoinColumn(name="sender_id", referencedColumnName="id")
+     */
+    private $usuariosSenderNotificacion;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=USUARIOS::class)
+     * @ORM\JoinColumn(name="receptor_id", referencedColumnName="id")
+     */
+    private $usuariosReceptorNotificacion;
+
     public function __construct()
     {
-        $this->is_readed = false; 
+        $this->is_readed = false;
     }
 
     /**
@@ -147,4 +159,38 @@ class NOTIFICACIONES
 
         return $this;
     }
+
+    public function getUsuariosSenderNotificacion(): ?USUARIOS
+    {
+        return $this->usuariosSenderNotificacion;
+    }
+
+    public function setUsuariosSenderNotificacion(?USUARIOS $usuariosSenderNotificacion): self
+    {
+        $this->usuariosSenderNotificacion = $usuariosSenderNotificacion;
+        return $this;
+    }
+
+    public function getUsuariosReceptorNotificacion(): ?USUARIOS
+    {
+        return $this->usuariosReceptorNotificacion;
+    }
+
+    public function setUsuariosReceptorNotificacion(?USUARIOS $usuariosReceptorNotificacion): self
+    {
+        $this->usuariosReceptorNotificacion = $usuariosReceptorNotificacion;
+        return $this;
+    }
 }
+
+
+// Sirve para las notificaciones.
+
+// id: Llave primaria de la tabla
+// not_type_id: Tipo de la notificación: me gusta, comentario…
+// type_id: Tipo de contenido que activa la notificación: publicación, imagen, album, etc.
+// ref_id: Id del contenido que activa la notificación
+// receptor_id: Usuario que va a recibir la notificación
+// sender_id: Usuario que activa la notificación
+// is_readed: Si ya fue leída la notificación
+// created_at: Fecha de creación de la notificación

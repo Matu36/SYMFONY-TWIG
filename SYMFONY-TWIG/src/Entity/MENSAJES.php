@@ -43,6 +43,19 @@ class MENSAJES
      */
     private $is_readed;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=USUARIOS::class)
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     */
+    private $usuariosMensajes;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=CONVERSACIONES::class)
+     * @ORM\JoinColumn(name="conversacion_id", referencedColumnName="id")
+     */
+    private $conversacionMensajes;
+
+
     public function __construct()
     {
         $this->is_readed = false; 
@@ -113,4 +126,36 @@ class MENSAJES
 
         return $this;
     }
+
+    public function getUsuariosMensajes(): ?USUARIOS
+    {
+        return $this->usuariosMensajes;
+    }
+
+    public function setUsuariosMensajes(?USUARIOS $usuariosMensajes): self
+    {
+        $this->usuariosMensajes = $usuariosMensajes;
+        return $this;
+    }
+
+    public function getConversacionMensajes(): ?CONVERSACIONES
+    {
+        return $this->conversacionMensajes;
+    }
+
+    public function setConversacionMensajes(?CONVERSACIONES $conversacionMensajes): self
+    {
+        $this->conversacionMensajes = $conversacionMensajes;
+        return $this;
+    }
 }
+
+
+// Sirve para guardar los mensajes de las conversaciones entre usuarios.
+
+// id: Lllave primaria de la tabla
+// content: contenido del mensaje
+// user_id: Usuario que envía el mensaje
+// conversation_id: Id de la conversación
+// created_at: Fecha de creación
+// is_readed: Si el mensaje ya fue leído por el otro usuario

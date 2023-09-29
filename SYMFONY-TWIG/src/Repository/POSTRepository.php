@@ -66,21 +66,25 @@ class POSTRepository extends ServiceEntityRepository
 
     public function findAllPostWithRelations()
     {
-        return $this->createQueryBuilder('p')
+        $qb = $this->createQueryBuilder('p')
             ->leftJoin('p.levelPost', 'lp')
             ->addSelect('lp')
             ->getQuery()
             ->getResult();
+
+        return $qb;
     }
 
     public function findPostByIdWithRelations(int $id)
     {
-        return $this->createQueryBuilder('p')
+        $qb = $this->createQueryBuilder('p')
             ->andWhere('p.id = :id')
             ->setParameter('id', $id)
             ->leftJoin('p.levelPost', 'lp')
             ->addSelect('lp')
             ->getQuery()
             ->getOneOrNullResult();
+
+        return $qb;
     }
 }

@@ -66,7 +66,7 @@ class IMAGENRepository extends ServiceEntityRepository
 
     public function findAllImagenWithRelations()
     {
-        return $this->createQueryBuilder('i')
+        $qb =  $this->createQueryBuilder('i')
             ->leftJoin('i.usuariosImagen', 'u')
             ->addSelect('u')
             ->leftJoin('i.levelImagen', 'l')
@@ -75,11 +75,13 @@ class IMAGENRepository extends ServiceEntityRepository
             ->addSelect('a')
             ->getQuery()
             ->getResult();
+
+        return $qb;
     }
 
     public function findImagenByIdWithRelations(int $id)
     {
-        return $this->createQueryBuilder('i')
+        $qb = $this->createQueryBuilder('i')
             ->andWhere('i.id = :id')
             ->setParameter('id', $id)
             ->leftJoin('i.usuariosImagen', 'u')
@@ -90,5 +92,7 @@ class IMAGENRepository extends ServiceEntityRepository
             ->addSelect('a')
             ->getQuery()
             ->getOneOrNullResult();
+
+        return $qb;
     }
 }

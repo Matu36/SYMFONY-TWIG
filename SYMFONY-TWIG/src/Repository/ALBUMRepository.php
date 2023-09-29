@@ -39,53 +39,56 @@ class ALBUMRepository extends ServiceEntityRepository
         }
     }
 
-//    /**
-//     * @return ALBUM[] Returns an array of ALBUM objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('a')
-//            ->andWhere('a.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('a.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    //    /**
+    //     * @return ALBUM[] Returns an array of ALBUM objects
+    //     */
+    //    public function findByExampleField($value): array
+    //    {
+    //        return $this->createQueryBuilder('a')
+    //            ->andWhere('a.exampleField = :val')
+    //            ->setParameter('val', $value)
+    //            ->orderBy('a.id', 'ASC')
+    //            ->setMaxResults(10)
+    //            ->getQuery()
+    //            ->getResult()
+    //        ;
+    //    }
 
-//    public function findOneBySomeField($value): ?ALBUM
-//    {
-//        return $this->createQueryBuilder('a')
-//            ->andWhere('a.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+    //    public function findOneBySomeField($value): ?ALBUM
+    //    {
+    //        return $this->createQueryBuilder('a')
+    //            ->andWhere('a.exampleField = :val')
+    //            ->setParameter('val', $value)
+    //            ->getQuery()
+    //            ->getOneOrNullResult()
+    //        ;
+    //    }
 
-public function findAllAlbumWithRelations()
+    public function findAllAlbumWithRelations()
     {
-        return $this->createQueryBuilder('a')
+        $qb = $this->createQueryBuilder('a')
             ->leftJoin('a.usuariosAlbum', 'u')
             ->addSelect('u')
             ->leftJoin('a.levelAlbum', 'l')
             ->addSelect('l')
             ->getQuery()
             ->getResult();
+
+        return $qb;
     }
 
     public function findAlbumByIdWithRelations(int $id)
-{
-    return $this->createQueryBuilder('a')
-        ->andWhere('a.id = :id')
-        ->setParameter('id', $id)
-        ->leftJoin('a.usuariosAlbum', 'u')
-        ->addSelect('u')
-        ->leftJoin('a.levelAlbum', 'l')
-        ->addSelect('l')
-        ->getQuery()
-        ->getOneOrNullResult();
-}
+    {
+        $qb = $this->createQueryBuilder('a')
+            ->andWhere('a.id = :id')
+            ->setParameter('id', $id)
+            ->leftJoin('a.usuariosAlbum', 'u')
+            ->addSelect('u')
+            ->leftJoin('a.levelAlbum', 'l')
+            ->addSelect('l')
+            ->getQuery()
+            ->getOneOrNullResult();
 
+        return $qb;
+    }
 }

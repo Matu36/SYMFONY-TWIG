@@ -66,21 +66,25 @@ class CORAZONRepository extends ServiceEntityRepository
 
     public function findAllCorazonWithRelations()
     {
-        return $this->createQueryBuilder('c')
+        $qb = $this->createQueryBuilder('c')
             ->leftJoin('c.usuariosCorazon', 'u')
             ->addSelect('u')
             ->getQuery()
             ->getResult();
+
+        return $qb;
     }
 
     public function findCorazonByIdWithRelations(int $id)
     {
-        return $this->createQueryBuilder('c')
+        $qb = $this->createQueryBuilder('c')
             ->andWhere('c.id = :id')
             ->setParameter('id', $id)
             ->leftJoin('c.usuariosCorazon', 'u')
             ->addSelect('u')
             ->getQuery()
             ->getOneOrNullResult();
+
+        return $qb;
     }
 }

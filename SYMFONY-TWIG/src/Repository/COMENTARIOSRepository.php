@@ -66,18 +66,20 @@ class COMENTARIOSRepository extends ServiceEntityRepository
 
     public function findAllCorazonWithRelations()
     {
-        return $this->createQueryBuilder('com')
+        $qb = $this->createQueryBuilder('com')
             ->leftJoin('com.usuariosComentarios', 'u')
             ->addSelect('u')
             ->leftJoin('com.comentariosComentarios', 'c')
             ->addSelect('c')
             ->getQuery()
             ->getResult();
+
+        return $qb;
     }
 
     public function findCorazonByIdWithRelations(int $id)
     {
-        return $this->createQueryBuilder('com')
+        $qb = $this->createQueryBuilder('com')
             ->andWhere('com.id = :id')
             ->setParameter('id', $id)
             ->leftJoin('com.usuariosComentarios', 'u')
@@ -86,5 +88,7 @@ class COMENTARIOSRepository extends ServiceEntityRepository
             ->addSelect('c')
             ->getQuery()
             ->getOneOrNullResult();
+
+        return $qb;
     }
 }

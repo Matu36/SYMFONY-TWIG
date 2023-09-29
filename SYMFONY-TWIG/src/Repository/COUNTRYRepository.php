@@ -66,17 +66,21 @@ class COUNTRYRepository extends ServiceEntityRepository
 
     public function findCountryAll()
     {
-        return $this->createQueryBuilder('c')
+        $qb =  $this->createQueryBuilder('c')
             ->getQuery()
             ->getResult();
+
+        return $qb;
     }
 
     public function findCountrylById($id)
     {
-        return $this->createQueryBuilder('c')
+        $qb = $this->createQueryBuilder('c')
             ->andWhere('c.id = :id')
             ->setParameter('id', $id)
             ->getQuery()
             ->getOneOrNullResult();
+
+        return $qb;
     }
 }

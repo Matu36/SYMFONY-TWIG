@@ -66,18 +66,20 @@ class CONVERSACIONESRepository extends ServiceEntityRepository
 
     public function findAllConversacionWithRelations()
     {
-        return $this->createQueryBuilder('con')
+        $qb = $this->createQueryBuilder('con')
             ->leftJoin('con.usuariosSenderConversation', 'u')
             ->addSelect('u')
             ->leftJoin('con.usuariosReceptorConversation', 'u')
             ->addSelect('u')
             ->getQuery()
             ->getResult();
+
+        return $qb;
     }
 
     public function findConversacionByIdWithRelations(int $id)
     {
-        return $this->createQueryBuilder('con')
+        $qb = $this->createQueryBuilder('con')
             ->andWhere('con.id = :id')
             ->setParameter('id', $id)
             ->leftJoin('con.usuariosSenderConversation', 'u')
@@ -86,5 +88,7 @@ class CONVERSACIONESRepository extends ServiceEntityRepository
             ->addSelect('u')
             ->getQuery()
             ->getOneOrNullResult();
+
+        return $qb;
     }
 }

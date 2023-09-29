@@ -39,34 +39,34 @@ class PORTFOLIORepository extends ServiceEntityRepository
         }
     }
 
-//    /**
-//     * @return PORTFOLIO[] Returns an array of PORTFOLIO objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('p')
-//            ->andWhere('p.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('p.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    //    /**
+    //     * @return PORTFOLIO[] Returns an array of PORTFOLIO objects
+    //     */
+    //    public function findByExampleField($value): array
+    //    {
+    //        return $this->createQueryBuilder('p')
+    //            ->andWhere('p.exampleField = :val')
+    //            ->setParameter('val', $value)
+    //            ->orderBy('p.id', 'ASC')
+    //            ->setMaxResults(10)
+    //            ->getQuery()
+    //            ->getResult()
+    //        ;
+    //    }
 
-//    public function findOneBySomeField($value): ?PORTFOLIO
-//    {
-//        return $this->createQueryBuilder('p')
-//            ->andWhere('p.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+    //    public function findOneBySomeField($value): ?PORTFOLIO
+    //    {
+    //        return $this->createQueryBuilder('p')
+    //            ->andWhere('p.exampleField = :val')
+    //            ->setParameter('val', $value)
+    //            ->getQuery()
+    //            ->getOneOrNullResult()
+    //        ;
+    //    }
 
-public function findAllPortfoliosWithRelations()
+    public function findAllPortfoliosWithRelations()
     {
-        return $this->createQueryBuilder('p')
+        $qb = $this->createQueryBuilder('p')
             ->leftJoin('p.countryPortfolio', 'c')
             ->addSelect('c')
             ->leftJoin('p.usuariosPortfolio', 'u')
@@ -77,22 +77,26 @@ public function findAllPortfoliosWithRelations()
             ->addSelect('l')
             ->getQuery()
             ->getResult();
+
+        return $qb;
     }
 
     public function findPortfolioByIdWithRelations(int $id)
-{
-    return $this->createQueryBuilder('p')
-        ->andWhere('p.id = :id')
-        ->setParameter('id', $id)
-        ->leftJoin('p.countryPortfolio', 'c')
-        ->addSelect('c')
-        ->leftJoin('p.usuariosPortfolio', 'u')
-        ->addSelect('u')
-        ->leftJoin('p.sentimentalPortfolio', 's')
-        ->addSelect('s')
-        ->leftJoin('p.levelPortfolio', 'l')
-        ->addSelect('l')
-        ->getQuery()
-        ->getOneOrNullResult();
-}
+    {
+        $qb =  $this->createQueryBuilder('p')
+            ->andWhere('p.id = :id')
+            ->setParameter('id', $id)
+            ->leftJoin('p.countryPortfolio', 'c')
+            ->addSelect('c')
+            ->leftJoin('p.usuariosPortfolio', 'u')
+            ->addSelect('u')
+            ->leftJoin('p.sentimentalPortfolio', 's')
+            ->addSelect('s')
+            ->leftJoin('p.levelPortfolio', 'l')
+            ->addSelect('l')
+            ->getQuery()
+            ->getOneOrNullResult();
+
+        return $qb;
+    }
 }

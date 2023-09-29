@@ -66,17 +66,21 @@ class SENTIMENTALRepository extends ServiceEntityRepository
 
     public function findSentimentalAll()
     {
-        return $this->createQueryBuilder('s')
+        $qb = $this->createQueryBuilder('s')
             ->getQuery()
             ->getResult();
+
+        return $qb;
     }
 
     public function findSentimentalById($id)
     {
-        return $this->createQueryBuilder('s')
+        $qb = $this->createQueryBuilder('s')
             ->andWhere('s.id = :id')
             ->setParameter('id', $id)
             ->getQuery()
             ->getOneOrNullResult();
+
+        return $qb;
     }
 }

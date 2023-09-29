@@ -66,18 +66,20 @@ class POSTIMAGERepository extends ServiceEntityRepository
 
     public function findAllPostImageWithRelations()
     {
-        return $this->createQueryBuilder('pi')
+        $qb = $this->createQueryBuilder('pi')
             ->leftJoin('pi.postPostImage', 'p')
             ->addSelect('p')
             ->leftJoin('pi.imagenPostImage', 'i')
             ->addSelect('i')
             ->getQuery()
             ->getResult();
+
+        return $qb;
     }
 
     public function findPostImageByIdWithRelations(int $id)
     {
-        return $this->createQueryBuilder('pi')
+        $qb = $this->createQueryBuilder('pi')
             ->andWhere('pi.id = :id')
             ->setParameter('id', $id)
             ->leftJoin('pi.postPostImage', 'p')
@@ -86,5 +88,7 @@ class POSTIMAGERepository extends ServiceEntityRepository
             ->addSelect('i')
             ->getQuery()
             ->getOneOrNullResult();
+
+        return $qb;
     }
 }

@@ -66,18 +66,20 @@ class AMIGOSRepository extends ServiceEntityRepository
 
     public function findAllAmigosWithRelations()
     {
-        return $this->createQueryBuilder('a')
+        $qb = $this->createQueryBuilder('a')
             ->leftJoin('a.usuariosSenderAmigos', 'u')
             ->addSelect('u')
             ->leftJoin('a.usuariosReceptorAmigos', 'u')
             ->addSelect('u')
             ->getQuery()
             ->getResult();
+
+        return $qb;
     }
 
     public function findAmigosByIdWithRelations(int $id)
     {
-        return $this->createQueryBuilder('a')
+        $qb = $this->createQueryBuilder('a')
             ->andWhere('a.id = :id')
             ->setParameter('id', $id)
             ->leftJoin('a.usuariosSenderAmigos', 'u')
@@ -86,5 +88,7 @@ class AMIGOSRepository extends ServiceEntityRepository
             ->addSelect('u')
             ->getQuery()
             ->getOneOrNullResult();
+
+        return $qb;
     }
 }

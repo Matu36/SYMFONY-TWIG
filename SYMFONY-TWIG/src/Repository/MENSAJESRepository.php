@@ -66,18 +66,20 @@ class MENSAJESRepository extends ServiceEntityRepository
 
     public function findAllCorazonWithRelations()
     {
-        return $this->createQueryBuilder('m')
+        $qb = $this->createQueryBuilder('m')
             ->leftJoin('m.usuariosMensajes', 'u')
             ->addSelect('u')
             ->leftJoin('m.conversacionMensajes', 'c')
             ->addSelect('c')
             ->getQuery()
             ->getResult();
+
+        return $qb;
     }
 
     public function findCorazonByIdWithRelations(int $id)
     {
-        return $this->createQueryBuilder('c')
+        $qb = $this->createQueryBuilder('c')
             ->andWhere('m.id = :id')
             ->setParameter('id', $id)
             ->leftJoin('m.usuariosMensajes', 'u')
@@ -86,5 +88,7 @@ class MENSAJESRepository extends ServiceEntityRepository
             ->addSelect('c')
             ->getQuery()
             ->getOneOrNullResult();
+
+        return $qb;
     }
 }

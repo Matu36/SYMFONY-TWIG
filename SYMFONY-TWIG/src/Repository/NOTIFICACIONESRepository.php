@@ -66,18 +66,20 @@ class NOTIFICACIONESRepository extends ServiceEntityRepository
 
     public function findAllNotificacionesWithRelations()
     {
-        return $this->createQueryBuilder('n')
+        $qb = $this->createQueryBuilder('n')
             ->leftJoin('n.usuariosSenderNotificacion', 'u')
             ->addSelect('u')
             ->leftJoin('n.usuariosReceptorNotificacion', 'u')
             ->addSelect('u')
             ->getQuery()
             ->getResult();
+
+        return $qb;
     }
 
     public function findNotificacionesByIdWithRelations(int $id)
     {
-        return $this->createQueryBuilder('c')
+        $qb = $this->createQueryBuilder('c')
             ->andWhere('n.id = :id')
             ->setParameter('id', $id)
             ->leftJoin('n.usuariosSenderNotificacion', 'u')
@@ -86,5 +88,7 @@ class NOTIFICACIONESRepository extends ServiceEntityRepository
             ->addSelect('u')
             ->getQuery()
             ->getOneOrNullResult();
+
+        return $qb;
     }
 }

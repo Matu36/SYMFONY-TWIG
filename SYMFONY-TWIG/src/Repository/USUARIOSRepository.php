@@ -66,19 +66,22 @@ class USUARIOSRepository extends ServiceEntityRepository
 
     public function findUsuarioById($id)
     {
-        return $this->createQueryBuilder('u')
+        $qb = $this->createQueryBuilder('u')
             ->where('u.id = :id')
             ->setParameter('id', $id)
             ->getQuery()
             ->getOneOrNullResult();
+
+            return $qb;
     }
 
     public function findUsuarioByEmail($email)
     {
-        return $this->createQueryBuilder('u')
+        $qb = $this->createQueryBuilder('u')
             ->where('u.email = :email')
             ->setParameter('email', $email)
-            ->getQuery()
-            ->getOneOrNullResult();
+            ->getQuery();
+            
+           return $qb->getOneOrNullResult();
     }
 }

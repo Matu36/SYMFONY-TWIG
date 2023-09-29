@@ -41,47 +41,50 @@ class RECOVERRepository extends ServiceEntityRepository
     }
 
     //    /**
-//     * @return RECOVER[] Returns an array of RECOVER objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('r')
-//            ->andWhere('r.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('r.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    //     * @return RECOVER[] Returns an array of RECOVER objects
+    //     */
+    //    public function findByExampleField($value): array
+    //    {
+    //        return $this->createQueryBuilder('r')
+    //            ->andWhere('r.exampleField = :val')
+    //            ->setParameter('val', $value)
+    //            ->orderBy('r.id', 'ASC')
+    //            ->setMaxResults(10)
+    //            ->getQuery()
+    //            ->getResult()
+    //        ;
+    //    }
 
     //    public function findOneBySomeField($value): ?RECOVER
-//    {
-//        return $this->createQueryBuilder('r')
-//            ->andWhere('r.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+    //    {
+    //        return $this->createQueryBuilder('r')
+    //            ->andWhere('r.exampleField = :val')
+    //            ->setParameter('val', $value)
+    //            ->getQuery()
+    //            ->getOneOrNullResult()
+    //        ;
+    //    }
     public function findRecoversWithUserData()
     {
-        return $this->createQueryBuilder('r')
+        $qb = $this->createQueryBuilder('r')
             ->leftJoin('r.usuarioRecover', 'u') // 'usuarioRecover' es el nombre del campo de la relación en la entidad RECOVER
             ->addSelect('u')                    // Incluir la entidad USUARIOS en la consulta
             ->getQuery()
             ->getResult();
+
+        return $qb;
     }
 
     public function findRecoverByIdWithUserData($id)
     {
-        return $this->createQueryBuilder('r')
+        $qb = $this->createQueryBuilder('r')
             ->leftJoin('r.usuarioRecover', 'u')
             ->addSelect('u')
             ->andWhere('r.id = :id')
             ->setParameter('id', $id)
             ->getQuery()
             ->getOneOrNullResult(); // Utiliza getOneOrNullResult para obtener un único resultado o null si no se encuentra
-    }
 
+        return $qb;
+    }
 }

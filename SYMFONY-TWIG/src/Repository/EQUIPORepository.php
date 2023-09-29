@@ -39,49 +39,52 @@ class EQUIPORepository extends ServiceEntityRepository
         }
     }
 
-//    /**
-//     * @return EQUIPO[] Returns an array of EQUIPO objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('e')
-//            ->andWhere('e.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('e.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    //    /**
+    //     * @return EQUIPO[] Returns an array of EQUIPO objects
+    //     */
+    //    public function findByExampleField($value): array
+    //    {
+    //        return $this->createQueryBuilder('e')
+    //            ->andWhere('e.exampleField = :val')
+    //            ->setParameter('val', $value)
+    //            ->orderBy('e.id', 'ASC')
+    //            ->setMaxResults(10)
+    //            ->getQuery()
+    //            ->getResult()
+    //        ;
+    //    }
 
-//    public function findOneBySomeField($value): ?EQUIPO
-//    {
-//        return $this->createQueryBuilder('e')
-//            ->andWhere('e.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+    //    public function findOneBySomeField($value): ?EQUIPO
+    //    {
+    //        return $this->createQueryBuilder('e')
+    //            ->andWhere('e.exampleField = :val')
+    //            ->setParameter('val', $value)
+    //            ->getQuery()
+    //            ->getOneOrNullResult()
+    //        ;
+    //    }
 
-public function findAllEquipoWithRelations()
-{
-    return $this->createQueryBuilder('e')
-        ->leftJoin('e.usuariosEquipo', 'u')
-        ->addSelect('u')
-        ->getQuery()
-        ->getResult();
+    public function findAllEquipoWithRelations()
+    {
+        $qb = $this->createQueryBuilder('e')
+            ->leftJoin('e.usuariosEquipo', 'u')
+            ->addSelect('u')
+            ->getQuery()
+            ->getResult();
+
+        return $qb;
+    }
+
+    public function findEequipoByIdWithRelations(int $id)
+    {
+        $qb =  $this->createQueryBuilder('e')
+            ->andWhere('e.id = :id')
+            ->setParameter('id', $id)
+            ->leftJoin('e.usuariosEquipo', 'u')
+            ->addSelect('u')
+            ->getQuery()
+            ->getOneOrNullResult();
+
+        return $qb;
+    }
 }
-
-public function findEequipoByIdWithRelations(int $id)
-{
-    return $this->createQueryBuilder('e')
-        ->andWhere('e.id = :id')
-        ->setParameter('id', $id)
-        ->leftJoin('e.usuariosEquipo', 'u')
-        ->addSelect('u')
-        ->getQuery()
-        ->getOneOrNullResult();
-}
-}
-

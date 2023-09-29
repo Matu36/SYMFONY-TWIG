@@ -66,17 +66,21 @@ class LABELRepository extends ServiceEntityRepository
 
     public function findLevelAll()
     {
-        return $this->createQueryBuilder('l')
+        $qb =  $this->createQueryBuilder('l')
             ->getQuery()
             ->getResult();
+
+        return $qb;
     }
 
     public function findLevelById($id)
     {
-        return $this->createQueryBuilder('l')
+        $qb = $this->createQueryBuilder('l')
             ->andWhere('l.id = :id')
             ->setParameter('id', $id)
             ->getQuery()
             ->getOneOrNullResult();
+
+        return $qb;
     }
 }

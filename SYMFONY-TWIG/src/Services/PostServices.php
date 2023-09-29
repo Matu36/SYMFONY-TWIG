@@ -5,7 +5,7 @@ namespace App\Services;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\POSTRepository;
 
-class PostService
+class PostServices
 {
     private $entityManager;
     private $postRepository;

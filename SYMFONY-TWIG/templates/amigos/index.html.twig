@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Amigos!
+{% endblock %}
+
+{% block body %}
+	<style></style>
+
+	<div class="example-wrapper">
+		<tbody>
+			{% for amigo in amigos %}
+				<tr>
+					<td>{{ amigo.senderId }}</td>
+					<td>{{ amigo.receptorId }}</td>
+					<td>{{ amigo.isAccepted }}</td>
+					<td>{{ amigo.isReaded }}</td>
+                    <td>{{ amigo.usuariosSenderAmigos.nombre }}</td>
+                    <td>{{ amigo.usuariosSenderAmigos.apellido }}</td>
+                    <td>{{ amigo.usuariosSenderAmigos.email }}</td>
+
+
+				</tr>
+			</div>
+		{% endfor %}
+	</tbody>
+</table></div>{% endblock %}

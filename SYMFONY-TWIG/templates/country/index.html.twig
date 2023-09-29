@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Country
+{% endblock %}
+
+{% block body %}
+	<style></style>
+
+	<div class="example-wrapper">
+
+		<tbody>
+			{% for country in countrys %}
+				<tr>
+					<td>{{ country.prefijo }}</td>
+					<td>{{ country.nombre }}</td>
+
+
+				</tr>
+			</div>
+		{% endfor %}
+	</tbody>
+</table></div>{% endblock %}

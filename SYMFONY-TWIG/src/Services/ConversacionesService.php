@@ -5,7 +5,7 @@ namespace App\Services;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\CONVERSACIONESRepository;
 
-class AmigosService
+class ConversacionesService
 {
     private $entityManager;
     private $conversacionesRepository;

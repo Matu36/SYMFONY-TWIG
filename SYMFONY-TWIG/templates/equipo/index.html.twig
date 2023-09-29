@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Equipo{% endblock %}
+
+{% block body %}
+<style>
+  
+</style>
+
+<div class="example-wrapper">
+   
+<tbody>
+			{% for equipo in equipos %}
+				<tr>
+					<td>{{ equipo.titulo }}</td>
+					<td>{{ equipo.descripcion }}</td>
+                    <td>{{ equipo.usuariosEquipo.nombre }}</td>
+                    <td>{{ equipo.usuariosEquipo.apellido }}</td>
+                     <td>{{ equipo.usuariosEquipo.email }}</td>
+
+
+				</tr>
+			</div>
+		{% endfor %}
+	</tbody>
+</table></div>{% endblock %}

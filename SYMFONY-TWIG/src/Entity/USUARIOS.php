@@ -5,13 +5,14 @@ namespace App\Entity;
 use App\Repository\USUARIOSRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass=USUARIOSRepository::class)
  * @ORM\Table(name="usuarios")
  */
 
-class USUARIOS
+class USUARIOS implements UserInterface
 {
 
     /**
@@ -123,6 +124,33 @@ class USUARIOS
         $this->contrasena = $contrasena;
 
         return $this;
+    }
+    public function getRoles()
+    {
+        // Define los roles del usuario, por ejemplo, ["ROLE_USER"]
+        // Esto es necesario para la interfaz UserInterface, 
+        // pero debes adaptarlo a tu lógica de roles
+    }
+
+    public function getPassword()
+    {
+        // Devuelve la contraseña hasheada
+        return $this->contrasena;
+    }
+
+    public function getSalt()
+    {
+        // Puedes dejar esto en blanco o implementarlo si es necesario
+    }
+
+    public function getUsername()
+    {
+        return $this->email;
+    }
+
+    public function eraseCredentials()
+    {
+        // Puedes dejar esto en blanco
     }
 
     public function getCode(): ?string

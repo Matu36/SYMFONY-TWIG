@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use App\Form\USUARIOSType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\FormError;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 
 class LandingController extends AbstractController
@@ -25,7 +26,7 @@ class LandingController extends AbstractController
     /**
      * @Route("/registro", name="app_formulario")
      */
-    public function formulario(Request $request): Response
+    public function formulario(Request $request, UserPasswordEncoderInterface $passwordEncoder): Response
     {
         $formulario = $this->createForm(USUARIOSType::class);
 
@@ -49,7 +50,8 @@ class LandingController extends AbstractController
                 $usuario->setNombre($datosFormulario['nombre']);
                 $usuario->setApellido($datosFormulario['apellido']);
                 $usuario->setEmail($datosFormulario['email']);
-                $usuario->setContrasena($datosFormulario['contrasena']);
+                $hashedPassword = $passwordEncoder->encodePassword($usuario, $datosFormulario['contrasena']);
+                $usuario->setContrasena($hashedPassword);
                 $usuario->setCode(null);
                 $usuario->setActivo(false);
                 $usuario->setAdmin(false);
@@ -62,10 +64,11 @@ class LandingController extends AbstractController
                 // Redirige a otra página después de procesar el formulario
                 return $this->redirectToRoute('app_inicio');
             }
-
-            return $this->render('landing/index.html.twig', [
-                'formulario' => $formulario->createView(),
-            ]);
         }
+
+        return $this->render('landing/index.html.twig', [
+            'formulario' => $formulario->createView(),
+        ]);
     }
+
 }

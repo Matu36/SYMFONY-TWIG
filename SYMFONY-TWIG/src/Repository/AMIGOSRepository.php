@@ -69,8 +69,8 @@ class AMIGOSRepository extends ServiceEntityRepository
         $qb = $this->createQueryBuilder('a')
             ->leftJoin('a.usuariosSenderAmigos', 'u')
             ->addSelect('u')
-            ->leftJoin('a.usuariosReceptorAmigos', 'u')
-            ->addSelect('u')
+            ->leftJoin('a.usuariosReceptorAmigos', 'f')
+            ->addSelect('f')
             ->getQuery()
             ->getResult();
 
@@ -84,8 +84,8 @@ class AMIGOSRepository extends ServiceEntityRepository
             ->setParameter('id', $id)
             ->leftJoin('a.usuariosSenderAmigos', 'u')
             ->addSelect('u')
-            ->leftJoin('a.usuariosReceptorAmigos', 'u')
-            ->addSelect('u')
+            ->leftJoin('a.usuariosReceptorAmigos', 'f')
+            ->addSelect('f')
             ->getQuery()
             ->getOneOrNullResult();
 

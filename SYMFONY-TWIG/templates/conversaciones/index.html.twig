@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Conversaciones{% endblock %}
+
+{% block body %}
+<style>
+   
+</style>
+
+<div class="example-wrapper">
+   
+<tbody>
+			{% for conversacion in conversaciones %}
+				<tr>
+					<td>{{ conversacion.usuariosSenderConversation.nombre }}</td>
+					<td>{{ conversacion.usuariosSenderConversation.apellido }}</td>
+					<td>{{ conversacion.usuariosReceptorConversation.nombre }}</td>
+					<td>{{ conversacion.usuariosReceptorConversation.apellido }}</td>
+                 
+
+
+				</tr>
+			</div>
+		{% endfor %}
+	</tbody>
+</table></div>{% endblock %}

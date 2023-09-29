@@ -69,8 +69,8 @@ class CONVERSACIONESRepository extends ServiceEntityRepository
         $qb = $this->createQueryBuilder('con')
             ->leftJoin('con.usuariosSenderConversation', 'u')
             ->addSelect('u')
-            ->leftJoin('con.usuariosReceptorConversation', 'u')
-            ->addSelect('u')
+            ->leftJoin('con.usuariosReceptorConversation', 'c')
+            ->addSelect('c')
             ->getQuery()
             ->getResult();
 
@@ -84,8 +84,8 @@ class CONVERSACIONESRepository extends ServiceEntityRepository
             ->setParameter('id', $id)
             ->leftJoin('con.usuariosSenderConversation', 'u')
             ->addSelect('u')
-            ->leftJoin('con.usuariosReceptorConversation', 'u')
-            ->addSelect('u')
+            ->leftJoin('con.usuariosReceptorConversation', 'c')
+            ->addSelect('c')
             ->getQuery()
             ->getOneOrNullResult();
 

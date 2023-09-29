@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Corazon
+{% endblock %}
+
+{% block body %}
+	<style></style>
+
+	<div class="example-wrapper">
+
+		<tbody>
+			{% for corazon in corazones %}
+				<tr>
+					<td>{{ corazon.usuariosCorazon.nombre }}</td>
+					<td>{{ corazon.usuariosCorazon.apellido }}</td>
+
+
+				</tr>
+			</div>
+		{% endfor %}
+	</tbody>
+</table></div>{% endblock %}

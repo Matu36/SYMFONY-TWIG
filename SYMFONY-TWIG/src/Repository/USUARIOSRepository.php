@@ -64,6 +64,7 @@ class USUARIOSRepository extends ServiceEntityRepository
 //        ;
 //    }
 
+
     public function findUsuarioById($id)
     {
         $qb = $this->createQueryBuilder('u')

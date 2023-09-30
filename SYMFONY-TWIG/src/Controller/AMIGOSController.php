@@ -30,6 +30,12 @@ class AMIGOSController extends AbstractController
 
         $json = $this->serializer->serialize($amigos, 'json');
 
+        if (empty($amigos)) {
+
+            $response = ['message' => 'Aún no hay Amigos.'];
+            return new JsonResponse($response, 200);
+        }
+
         if ($request->headers->get('Accept') === 'application/json') {
             return new JsonResponse($json, 200, [], true);
         }
@@ -47,6 +53,12 @@ class AMIGOSController extends AbstractController
         $amigos = $this->amigosService->findAmigosByIdWithRelations($id);
 
         $json = $this->serializer->serialize($amigos, 'json');
+
+        if (empty($amigos)) {
+
+            $response = ['message' => 'Aún no hay Amigos del id seleccionado.'];
+            return new JsonResponse($response, 200);
+        }
 
         if ($request->headers->get('Accept') === 'application/json') {
             return new JsonResponse($json, 200, [], true);

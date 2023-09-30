@@ -35,6 +35,13 @@ class COMENTARIOSController extends AbstractController
 
         $json = $this->serializer->serialize($comentarios, 'json');
 
+        if (empty($comentarios)) {
+
+            $response = ['message' => 'Aún no hay Comentarios.'];
+            return new JsonResponse($response, 200);
+        }
+        
+
         if ($request->headers->get('Accept') === 'application/json') {
             return new JsonResponse($json, 200, [], true);
         }
@@ -53,6 +60,12 @@ class COMENTARIOSController extends AbstractController
         $comentarios = $this->comentariosService->findComentariosByIdWithRelations($id);
 
         $json = $this->serializer->serialize($comentarios, 'json');
+
+        if (empty($comentarios)) {
+
+            $response = ['message' => 'Aún no hay Comentarios del id seleccionado.'];
+            return new JsonResponse($response, 200);
+        }
 
         if ($request->headers->get('Accept') === 'application/json') {
             return new JsonResponse($json, 200, [], true);

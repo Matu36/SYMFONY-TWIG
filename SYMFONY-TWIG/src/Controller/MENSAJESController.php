@@ -30,6 +30,11 @@ class MENSAJESController extends AbstractController
 
         $json = $this->serializer->serialize($mensajes, 'json');
 
+        if (empty($mensajes)) {
+            $response = ['message' => 'Aún no hay ningún mensaje.'];
+            return new JsonResponse($response, 200);
+        }
+
         if ($request->headers->get('Accept') === 'application/json') {
             return new JsonResponse($json, 200, [], true);
         }
@@ -47,6 +52,11 @@ class MENSAJESController extends AbstractController
         $mensajes = $this->mensajeService->findMensajesByIdWithRelations($id);
 
         $json = $this->serializer->serialize($mensajes, 'json');
+
+        if (empty($mensajes)) {
+            $response = ['message' => 'Aún no hay ningún mensaje del id seleccionado.'];
+            return new JsonResponse($response, 200);
+        }
 
         if ($request->headers->get('Accept') === 'application/json') {
             return new JsonResponse($json, 200, [], true);

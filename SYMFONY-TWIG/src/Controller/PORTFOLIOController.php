@@ -23,6 +23,12 @@ class PORTFOLIOController extends AbstractController
         // Serializa los resultados en formato JSON
         $json = $serializer->serialize($portfolios, 'json');
 
+        if (empty($portfolios)) {
+
+            $response = ['message' => 'Aún no hay datos en el Portfolio.'];
+            return new JsonResponse($response, 200);
+        }
+
         // Crea una respuesta JSON
         return new JsonResponse($json, 200, [], true);
     }
@@ -40,6 +46,12 @@ class PORTFOLIOController extends AbstractController
 
         // Serializa el resultado en formato JSON
         $json = $serializer->serialize($portfolio, 'json');
+
+        if (empty($portfolio)) {
+
+            $response = ['message' => 'Aún no hay datos en el Portfolio.'];
+            return new JsonResponse($response, 200);
+        }
 
         // Si la solicitud incluye la cabecera 'Accept' con 'application/json', devuelve una respuesta JSON
         if ($request->headers->get('Accept') === 'application/json') {

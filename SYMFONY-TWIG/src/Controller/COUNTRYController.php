@@ -31,6 +31,11 @@ class COUNTRYController extends AbstractController
 
             $json = $this->serializer->serialize($countrys, 'json');
 
+            if (empty($countrys)) {
+                $response = ['message' => 'Aún no hay Países elegidos.'];
+                return new JsonResponse($response, 200);
+            }
+
             if ($request->headers->get('Accept') === 'application/json') {
                 return new JsonResponse($json, 200, [], true);
             }
@@ -49,6 +54,11 @@ class COUNTRYController extends AbstractController
         $countrys = $this->countryService->findCountryByIdWithRelations($id);
 
         $json = $this->serializer->serialize($countrys, 'json');
+
+        if (empty($countrys)) {
+            $response = ['message' => 'Aún no hay Países elegidos del id seleccionado.'];
+            return new JsonResponse($response, 200);
+        }
 
         if ($request->headers->get('Accept') === 'application/json') {
             return new JsonResponse($json, 200, [], true);

@@ -30,6 +30,12 @@ class POSTIMAGENController extends AbstractController
 
         $json = $this->serializer->serialize($postImagen, 'json');
 
+        if (empty($postImagen)) {
+            
+            $response = ['message' => 'Aún no hay ninguna PostImagen.'];
+            return new JsonResponse($response, 200);
+        }
+
         if ($request->headers->get('Accept') === 'application/json') {
             return new JsonResponse($json, 200, [], true);
         }
@@ -47,6 +53,12 @@ class POSTIMAGENController extends AbstractController
         $postImagen = $this->postImagenService->findPostImageByIdWithRelations($id);
 
         $json = $this->serializer->serialize($postImagen, 'json');
+
+        if (empty($postImagen)) {
+            
+            $response = ['message' => 'Aún no hay ninguna PostImagen del id seleccionado.'];
+            return new JsonResponse($response, 200);
+        }
 
         if ($request->headers->get('Accept') === 'application/json') {
             return new JsonResponse($json, 200, [], true);

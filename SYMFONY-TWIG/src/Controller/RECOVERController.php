@@ -8,6 +8,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 
 class RECOVERController extends AbstractController
@@ -30,6 +31,12 @@ class RECOVERController extends AbstractController
 
         $json = $this->serializer->serialize($recover, 'json');
 
+        if (empty($recover)) {
+
+            $response = ['message' => 'Aún no hay ningún intento de recuperar el usuario.'];
+            return new JsonResponse($response, 200);
+        }
+
         if ($request->headers->get('Accept') === 'application/json') {
             return new JsonResponse($json, 200, [], true);
         }
@@ -47,6 +54,13 @@ class RECOVERController extends AbstractController
         $recover = $this->recoverService->findRecoverByIdWithRelations($id);
 
         $json = $this->serializer->serialize($recover, 'json');
+
+        if (empty($recover)) {
+
+            $response = ['message' => 'Aún no hay ningún intento de recuperar el 
+            usuario del id seleccionado.'];
+            return new JsonResponse($response, 200);
+        }
 
         if ($request->headers->get('Accept') === 'application/json') {
             return new JsonResponse($json, 200, [], true);

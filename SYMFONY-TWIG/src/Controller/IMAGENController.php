@@ -30,6 +30,11 @@ class IMAGENController extends AbstractController
 
             $json = $this->serializer->serialize($imagenes, 'json');
 
+            if (empty($imagenes)) {
+                $response = ['message' => 'Aún no hay imagenes.'];
+                return new JsonResponse($response, 200);
+            }
+
             if ($request->headers->get('Accept') === 'application/json') {
                 return new JsonResponse($json, 200, [], true);
             }
@@ -48,6 +53,11 @@ class IMAGENController extends AbstractController
         $imagen = $this->imagenService->findImagenByIdWithRelations($id);
 
         $json = $this->serializer->serialize($imagen, 'json');
+
+        if (empty($imagen)) {
+            $response = ['message' => 'Aún no hay imagenes del id seleccionado.'];
+            return new JsonResponse($response, 200);
+        }
 
         if ($request->headers->get('Accept') === 'application/json') {
             return new JsonResponse($json, 200, [], true);

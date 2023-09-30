@@ -30,6 +30,12 @@ class SENTIMENTALController extends AbstractController
 
         $json = $this->serializer->serialize($sentimental, 'json');
 
+        if (empty($sentimental)) {
+            
+            $response = ['message' => 'Aún no hay ningún sentimiento.'];
+            return new JsonResponse($response, 200);
+        }
+
         if ($request->headers->get('Accept') === 'application/json') {
             return new JsonResponse($json, 200, [], true);
         }
@@ -46,6 +52,12 @@ class SENTIMENTALController extends AbstractController
         $sentimental = $this->sentimentalService->findSentimentalByIdWithRelations($id);
 
         $json = $this->serializer->serialize($sentimental, 'json');
+
+        if (empty($sentimental)) {
+            
+            $response = ['message' => 'Aún no hay ningún sentimiento del id seleccionado.'];
+            return new JsonResponse($response, 200);
+        }
 
         if ($request->headers->get('Accept') === 'application/json') {
             return new JsonResponse($json, 200, [], true);

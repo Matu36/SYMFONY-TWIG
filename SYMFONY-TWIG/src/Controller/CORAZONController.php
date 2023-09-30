@@ -31,6 +31,12 @@ class CORAZONController extends AbstractController
 
         $json = $this->serializer->serialize($corazones, 'json');
 
+        if (empty($corazones)) {
+
+            $response = ['message' => 'Aún no hay Corazones.'];
+            return new JsonResponse($response, 200);
+        }
+
         if ($request->headers->get('Accept') === 'application/json') {
             return new JsonResponse($json, 200, [], true);
         }
@@ -48,6 +54,12 @@ class CORAZONController extends AbstractController
         $corazones = $this->corazonService->findCorazonByIdWithRelations($id);
 
         $json = $this->serializer->serialize($corazones, 'json');
+
+        if (empty($corazones)) {
+
+            $response = ['message' => 'Aún no hay Corazones del id seleccionado.'];
+            return new JsonResponse($response, 200);
+        }
 
         if ($request->headers->get('Accept') === 'application/json') {
             return new JsonResponse($json, 200, [], true);

@@ -33,6 +33,12 @@ class CONVERSACIONESController extends AbstractController
 
         $json = $this->serializer->serialize($conversaciones, 'json');
 
+        if (empty($conversaciones)) {
+
+            $response = ['message' => 'Aún no hay Conversaciones.'];
+            return new JsonResponse($response, 200);
+        }
+
         if ($request->headers->get('Accept') === 'application/json') {
             return new JsonResponse($json, 200, [], true);
         }
@@ -52,6 +58,12 @@ class CONVERSACIONESController extends AbstractController
         $conversaciones = $this->conversacionesService->findConversacionesByIdWithRelations($id);
 
         $json = $this->serializer->serialize($conversaciones, 'json');
+
+        if (empty($conversaciones)) {
+
+            $response = ['message' => 'Aún no hay Conversaciones del id seleccionado.'];
+            return new JsonResponse($response, 200);
+        }
 
         if ($request->headers->get('Accept') === 'application/json') {
             return new JsonResponse($json, 200, [], true);

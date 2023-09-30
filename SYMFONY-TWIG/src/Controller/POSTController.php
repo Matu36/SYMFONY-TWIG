@@ -30,6 +30,12 @@ class POSTController extends AbstractController
 
         $json = $this->serializer->serialize($post, 'json');
 
+        if (empty($post)) {
+
+            $response = ['message' => 'Aún no hay ningún Post.'];
+            return new JsonResponse($response, 200);
+        }
+
         if ($request->headers->get('Accept') === 'application/json') {
             return new JsonResponse($json, 200, [], true);
         }
@@ -47,6 +53,12 @@ class POSTController extends AbstractController
         $post = $this->postService->findPostByIdWithRelations($id);
 
         $json = $this->serializer->serialize($post, 'json');
+
+        if (empty($post)) {
+
+            $response = ['message' => 'Aún no hay ningún Post del id seleccionado.'];
+            return new JsonResponse($response, 200);
+        }
 
         if ($request->headers->get('Accept') === 'application/json') {
             return new JsonResponse($json, 200, [], true);

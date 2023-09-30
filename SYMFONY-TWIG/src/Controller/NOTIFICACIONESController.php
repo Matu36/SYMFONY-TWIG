@@ -30,6 +30,11 @@ class NOTIFICACIONESController extends AbstractController
 
         $json = $this->serializer->serialize($notificaciones, 'json');
 
+        if (empty($notificaciones)) {
+            $response = ['message' => 'Aún no hay ningún notificación.'];
+            return new JsonResponse($response, 200);
+        }
+
         if ($request->headers->get('Accept') === 'application/json') {
             return new JsonResponse($json, 200, [], true);
         }
@@ -47,6 +52,11 @@ class NOTIFICACIONESController extends AbstractController
         $notificaciones = $this->notificacionesService->findNotificacionesByIdWithRelations($id);
 
         $json = $this->serializer->serialize($notificaciones, 'json');
+
+        if (empty($notificaciones)) {
+            $response = ['message' => 'Aún no hay ningún notificación del id seleccionado.'];
+            return new JsonResponse($response, 200);
+        }
 
         if ($request->headers->get('Accept') === 'application/json') {
             return new JsonResponse($json, 200, [], true);

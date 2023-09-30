@@ -30,6 +30,11 @@ class LABELController extends AbstractController
 
             $json = $this->serializer->serialize($levels, 'json');
 
+            if (empty($levels)) {
+                $response = ['message' => 'Aún no hay Levels.'];
+                return new JsonResponse($response, 200);
+            }
+
             if ($request->headers->get('Accept') === 'application/json') {
                 return new JsonResponse($json, 200, [], true);
             }
@@ -47,6 +52,11 @@ class LABELController extends AbstractController
         $levels = $this->labelService->findLevelByIdWithRelations($id);
 
         $json = $this->serializer->serialize($levels, 'json');
+
+        if (empty($levels)) {
+            $response = ['message' => 'Aún no hay Levels del id seleccionado.'];
+            return new JsonResponse($response, 200);
+        }
 
         if ($request->headers->get('Accept') === 'application/json') {
             return new JsonResponse($json, 200, [], true);

@@ -1,13 +1,33 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}RECOVER{% endblock %}
+{% block title %}RECOVER
+{% endblock %}
 
 {% block body %}
-<style>
-  
-</style>
+	<style></style>
 
-<div class="example-wrapper">
-   
-</div>
+	<div class="example-wrapper">
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>ID</th>
+
+					<th>Código</th>
+					<th>Usado</th>
+					<th>Fecha de Creación</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for item in recover %}
+					<tr>
+						<td>{{ item.id }}</td>
+
+						<td>{{ item.code }}</td>
+						<td>{{ item.usado is null ? 'N/A' : item.usado }}</td>
+						<td>{{ item.createdAt|date('Y-m-d H:i:s') }}</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
 {% endblock %}

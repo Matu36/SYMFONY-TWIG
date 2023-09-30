@@ -8,5 +8,16 @@
 
 <div class="example-wrapper">
    
-</div>
-{% endblock %}
+<tbody>
+			{% for sentiment in sentimental %} 
+				<tr>
+
+					<td>{{ sentiment.id }}</td>
+					<td>{{ sentiment.nombre }}</td>
+
+
+				</tr>
+			</div>
+		{% endfor %}
+	</tbody>
+</table></div>{% endblock %}

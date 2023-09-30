@@ -2,73 +2,62 @@
 
 namespace App\Controller;
 
-use App\Entity\RECOVER;
-use App\Repository\RECOVERRepository;
-use Symfony\Component\HttpFoundation\JsonResponse;
+use App\Services\RecoverService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Serializer\SerializerInterface;
+use Symfony\Component\HttpFoundation\Request;
+
 
 class RECOVERController extends AbstractController
 {
-     /**
+
+    private $recoverService;
+    private $serializer;
+
+    public function __construct(RecoverService $recoverService, SerializerInterface $serializer)
+    {
+        $this->recoverService = $recoverService;
+        $this->serializer = $serializer;
+    }
+    /**
      * @Route("/recover", name="recover")
      */
-    public function index(RECOVERRepository $recoverRepository): JsonResponse
+    public function GetRecovers(Request $request): Response
     {
-        $recoversWithUserData = $recoverRepository->findRecoversWithUserData();
+        $recover = $this->recoverService->findAllRecoverWithRelations();
 
-       
-        $formattedResults = [];
-        foreach ($recoversWithUserData as $recover) {
-            $userData = [
-                'id' => $recover->getUsuario()->getId(),
-                'nombre' => $recover->getUsuario()->getNombre(),
-                'apellido' => $recover->getUsuario()->getApellido(),
-                'email' => $recover->getUsuario()->getEmail(),
-                'fecha' => $recover->getUsuario()->getCreatedAd(),
-            ];
+        $json = $this->serializer->serialize($recover, 'json');
 
-            $formattedResults[] = [
-                'id' => $recover->getId(),
-                'userData' => $userData,
-                'code' => $recover->getCode(),
-                'usado' => $recover->isUsado(),
-                'createdAt' => $recover->getCreatedAt()->format('Y-m-d H:i:s'),
-            ];
+        if ($request->headers->get('Accept') === 'application/json') {
+            return new JsonResponse($json, 200, [], true);
         }
 
-        return $this->json($formattedResults);
+        return $this->render('recover/index.html.twig', [
+            'recover' => $recover,
+        ]);
     }
 
- /**
- * @Route("/recover/recover/{id}", name="recoverId", requirements={"id"="\d+"})
- */
-public function findBYId(RECOVERRepository $recoverRepository, $id): JsonResponse
-{
-    $recoverWithUserData = $recoverRepository->findRecoverByIdWithUserData($id);
+    /**
+     * @Route("/recover/{id}", name="recover_Id")
+     */
+    public function RecoverById(int $id, Request $request): JsonResponse
+    {
+        $recover = $this->recoverService->findRecoverByIdWithRelations($id);
 
-    if (!$recoverWithUserData) {
-        return $this->json(['message' => 'No se encontró ningún registro con ese ID.'], 404);
+        $json = $this->serializer->serialize($recover, 'json');
+
+        if ($request->headers->get('Accept') === 'application/json') {
+            return new JsonResponse($json, 200, [], true);
+        }
+
+        if (!$recover) {
+            throw $this->createNotFoundException('No se encontró el Mensaje con el ID proporcionado');
+        }
+
+        return $this->render('recover/index.html.twig', [
+            'recover' => [$recover],
+        ]);
     }
-
-    $userData = [
-        'id' => $recoverWithUserData->getUsuario()->getId(),
-        'nombre' => $recoverWithUserData->getUsuario()->getNombre(),
-        'apellido' => $recoverWithUserData->getUsuario()->getApellido(),
-        'email' => $recoverWithUserData->getUsuario()->getEmail(),
-        'fecha' => $recoverWithUserData->getUsuario()->getCreatedAd()->format('Y-m-d H:i:s'),
-    ];
-
-    $formattedResult = [
-        'id' => $id, 
-        'userData' => $userData,
-        'code' => $recoverWithUserData->getCode(),
-        'usado' => $recoverWithUserData->isUsado(),
-        'createdAt' => $recoverWithUserData->getCreatedAt()->format('Y-m-d H:i:s'),
-    ];
-
-    return $this->json($formattedResult);
 }
-
-}
-

@@ -55,7 +55,7 @@ class COUNTRYController extends AbstractController
         }
 
         if (!$countrys) {
-            throw $this->createNotFoundException('No se encontró el Corazón con el ID proporcionado');
+            throw $this->createNotFoundException('No se encontró el Country con el ID proporcionado');
         }
 
         return $this->render('country/index.html.twig', [

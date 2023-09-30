@@ -63,7 +63,7 @@ class COMENTARIOSController extends AbstractController
         }
 
         return $this->render('comentarios/index.html.twig', [
-            'comentarios' => $comentarios,
+            'comentarios' => [$comentarios],
         ]);
     }
 }

@@ -57,7 +57,7 @@ class AMIGOSController extends AbstractController
         }
 
         return $this->render('amigos/index.html.twig', [
-            'amigos' => $amigos,
+            'amigos' => [$amigos],
         ]);
     }
 }

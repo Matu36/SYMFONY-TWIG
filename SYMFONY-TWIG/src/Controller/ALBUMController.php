@@ -57,7 +57,7 @@ class ALBUMController extends AbstractController
         }
 
         return $this->render('album/index.html.twig', [
-            'albums' => $albums,
+            'albums' => [$albums],
         ]);
     }
 }

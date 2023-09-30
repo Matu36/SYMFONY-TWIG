@@ -54,11 +54,11 @@ class EQUIPOController extends AbstractController
         }
 
         if (!$equipos) {
-            throw $this->createNotFoundException('No se encontró el Corazón con el ID proporcionado');
+            throw $this->createNotFoundException('No se encontró el Equipo con el ID proporcionado');
         }
 
         return $this->render('equipo/index.html.twig', [
-            'equipos' => $equipos,
+            'equipos' => [$equipos],
         ]);
     }
 }

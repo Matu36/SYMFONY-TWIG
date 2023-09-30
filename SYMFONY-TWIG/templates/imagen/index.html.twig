@@ -8,6 +8,36 @@
 </style>
 
 <div class="example-wrapper">
-   
-</div>
-{% endblock %}
+<tbody>
+			{% for img in imagen %}
+			<table>
+    <thead>
+        <tr>
+          
+            <th>Título</th>
+            <th>Contenido</th>
+            <th>Usuario</th>
+            <th>Level</th>
+            <th>Album</th>
+            <th>Fecha de Creación</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for img in imagen %}
+            <tr>
+               
+                <td>{{ img.titulo }}</td>
+                <td>{{ img.contenido }}</td>
+                <td>{{ img.usuariosImagen.nombre }} {{ img.usuariosImagen.apellido }}</td>
+                <td>{{ img.levelImagen.nombre }}</td>
+                <td>{{ img.albumImagen.titulo }}</td>
+                <td>{{ img.createdAt|date('Y-m-d H:i:s') }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+			</div>
+		{% endfor %}
+	</tbody>
+</table></div>{% endblock %}

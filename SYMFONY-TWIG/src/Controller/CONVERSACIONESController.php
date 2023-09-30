@@ -62,7 +62,7 @@ class CONVERSACIONESController extends AbstractController
         }
 
         return $this->render('conversaciones/index.html.twig', [
-            'conversaciones' => $conversaciones,
+            'conversaciones' => [$conversaciones],
         ]);
     }
 }

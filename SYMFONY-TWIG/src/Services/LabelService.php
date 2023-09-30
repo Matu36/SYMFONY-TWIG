@@ -5,7 +5,7 @@ namespace App\Services;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\LABELRepository;
 
-class LabelServices
+class LabelService
 {
     private $entityManager;
     private $labelRepository;

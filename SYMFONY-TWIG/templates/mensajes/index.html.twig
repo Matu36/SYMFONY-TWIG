@@ -1,13 +1,25 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Mensajes{% endblock %}
+{% block title %}Mensajes
+{% endblock %}
 
 {% block body %}
-<style>
-   
-</style>
+	<style></style>
 
-<div class="example-wrapper">
+	<div class="example-wrapper">
 
-</div>
-{% endblock %}
+		<tbody>
+			{% for mensaje in mensajes %}
+				<tr>
+					<td>{{ mensaje.contenido}}</td>
+					<td>{{ mensaje.usuariosMensajes.nombre }}</td>
+					<td>{{ mensaje.usuariosMensajes.apellido }}</td>
+					<td>{{ mensaje.usuariosMensajes.nombre }}</td>
+					<td>{{ mensaje.usuariosMensajes.apellido }}</td>
+
+
+				</tr>
+			</div>
+		{% endfor %}
+	</tbody>
+</table></div>{% endblock %}

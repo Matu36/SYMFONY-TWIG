@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Services\LabelServices;
+use App\Services\LabelService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -16,7 +16,7 @@ class LABELController extends AbstractController
     private $labelService;
     private $serializer;
 
-    public function __construct(LabelServices $labelService, SerializerInterface $serializer)
+    public function __construct(LabelService $labelService, SerializerInterface $serializer)
     {
         $this->labelService = $labelService;
         $this->serializer = $serializer;

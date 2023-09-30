@@ -16,7 +16,7 @@ class MensajesService
         $this->mensajesRepository = $mensajesRepository;
     }
 
-    public function findAllLevelWithRelations()
+    public function findAlMensajesWithRelations()
     {
         try {
             $mensajes = $this->mensajesRepository->findAllMensajesWithRelations();
@@ -27,7 +27,7 @@ class MensajesService
         }
     }
 
-    public function findLevelByIdWithRelations(int $id)
+    public function findMensajesByIdWithRelations(int $id)
     {
         try {
             $mensaje = $this->mensajesRepository->findMensajeByIdWithRelations($id);

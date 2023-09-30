@@ -1,13 +1,23 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}POSTIMAGEN{% endblock %}
+{% block title %}POSTIMAGEN
+{% endblock %}
 
 {% block body %}
-<style>
-   
-</style>
+	<style></style>
 
-<div class="example-wrapper">
-   
-</div>
-{% endblock %}
+	<div class="example-wrapper">
+
+		<tbody>
+			{% for postIma in postImagen %}
+				<tr>
+
+					<td>{{ postIma.postPostImage.titulo }}</td>
+					<td>{{ postIma.postPostImage.contenido }}</td>
+
+
+				</tr>
+			</div>
+		{% endfor %}
+	</tbody>
+</table></div>{% endblock %}

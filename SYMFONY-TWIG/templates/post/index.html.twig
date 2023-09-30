@@ -1,13 +1,23 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Post{% endblock %}
+{% block title %}Post
+{% endblock %}
 
 {% block body %}
-<style>
-  
-</style>
+	<style></style>
 
-<div class="example-wrapper">
-   
-</div>
-{% endblock %}
+	<div class="example-wrapper">
+
+		<tbody>
+			{% for pos in post %}
+				<tr>
+
+					<td>{{ pos.titulo }}</td>
+					<td>{{ pos.contenido }}</td>
+
+
+				</tr>
+			</div>
+		{% endfor %}
+	</tbody>
+</table></div>{% endblock %}

@@ -79,7 +79,7 @@ class MENSAJESRepository extends ServiceEntityRepository
 
     public function findMensajeByIdWithRelations(int $id)
     {
-        $qb = $this->createQueryBuilder('c')
+        $qb = $this->createQueryBuilder('m')
             ->andWhere('m.id = :id')
             ->setParameter('id', $id)
             ->leftJoin('m.usuariosMensajes', 'u')

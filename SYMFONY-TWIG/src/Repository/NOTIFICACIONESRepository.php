@@ -69,8 +69,8 @@ class NOTIFICACIONESRepository extends ServiceEntityRepository
         $qb = $this->createQueryBuilder('n')
             ->leftJoin('n.usuariosSenderNotificacion', 'u')
             ->addSelect('u')
-            ->leftJoin('n.usuariosReceptorNotificacion', 'u')
-            ->addSelect('u')
+            ->leftJoin('n.usuariosReceptorNotificacion', 'r')
+            ->addSelect('r')
             ->getQuery()
             ->getResult();
 
@@ -79,13 +79,13 @@ class NOTIFICACIONESRepository extends ServiceEntityRepository
 
     public function findNotificacionesByIdWithRelations(int $id)
     {
-        $qb = $this->createQueryBuilder('c')
+        $qb = $this->createQueryBuilder('n')
             ->andWhere('n.id = :id')
             ->setParameter('id', $id)
             ->leftJoin('n.usuariosSenderNotificacion', 'u')
             ->addSelect('u')
-            ->leftJoin('n.usuariosReceptorNotificacion', 'u')
-            ->addSelect('u')
+            ->leftJoin('n.usuariosReceptorNotificacion', 'r')
+            ->addSelect('r')
             ->getQuery()
             ->getOneOrNullResult();
 

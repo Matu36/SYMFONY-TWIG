@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{# {% extends 'base.html.twig' %}
 
 {% block title %}SYMFONY-TWIG{% endblock %}
 
@@ -21,46 +21,46 @@
     
     
 </div>
+{% endblock %} #}
+
+{% extends 'base.html.twig' %}
+
+{% block title %}SYMFONY-TWIG
 {% endblock %}
 
-{# {% extends 'base.html.twig' %}
-
-{% block title %}SYMFONY-TWIG{% endblock %}
-
 {% block body %}
-<style>
-    /* Estilos personalizados si es necesario */
-</style>
+	<style>/* Estilos personalizados si es necesario */</style>
 
 <div class="form-container">
-    <h1 class="title"> ¿Entramos? </h1>
+	<h1 class="title">
+		¿Entramos?
+	</h1>
 
-    {# Formulario de inicio de sesión #}
-    {# {{ form_start(form) }}
-    {{ form_row(form.email, {'attr': {'class': 'form-control', 'placeholder': 'Correo Electrónico'}}) }}
-    {{ form_row(form.password, {'attr': {'class': 'form-control', 'placeholder': 'Contraseña'}}) }}
-    <button type="submit" class="btn btn-primary">Iniciar sesión</button>
-    {{ form_end(form) }} #}
+	{# Formulario de inicio de sesión #}
+	{# {{ form_start(form) }} #}
+	{# {{ form_row(form.email, {'attr': {'class': 'form-control', 'placeholder': 'Correo Electrónico'}}) }}
+	    {{ form_row(form.contrasena, {'attr': {'class': 'form-control', 'placeholder': 'Contraseña'}}) }}
+	    <button type="submit" class="btn btn-primary">Iniciar sesión</button> #}
+	{# {{ form_end(form) }}  #}
 
-    {# <hr> #}
+	<hr>
 
-    {# <p> ¿Aun no sos usuario? </p>
+		<p>
+	¿Aun no sos usuario?
+	</p>
 
-    {# Botón de Bootstrap que muestra/oculta el formulario de registro #}
-    {# <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#registroForm" aria-expanded="false" aria-controls="registroForm">
-        Mostrar Formulario de Registro
-    </button> #} 
+	{# Botón de Bootstrap que muestra/oculta el formulario de registro #}
+		<button class="btn btn-link" type="button" data-toggle="collapse" data-target="#formulario" aria-expanded="false" aria-controls="registroForm"> Registrate!
+	</button>
 
-    {# Formulario de registro colapsable #}
-    {# <div class="collapse" id="registroForm"> #}
-        {# {{ form_start(registroForm) }}
-        {{ form_row(registroForm.nombre, {'attr': {'class': 'form-control', 'placeholder': 'Nombre'}}) }}
-        {{ form_row(registroForm.apellido, {'attr': {'class': 'form-control', 'placeholder': 'Apellido'}}) }}
-        {{ form_row(registroForm.email, {'attr': {'class': 'form-control', 'placeholder': 'Correo Electrónico'}}) }}
-        {{ form_row(registroForm.contrasena, {'attr': {'class': 'form-control', 'placeholder': 'Contraseña'}}) }}
-        <button type="submit" class="btn btn-primary">Registrar</button>
-        {{ form_end(registroForm) }} #}
-    {# </div>
-</div>
-{% endblock %}  #}
-
+	{# Formulario de registro colapsable #}
+	<div class="collapse" id="formulario">
+		{{ form_start(formulario) }}
+		{{ form_row(formulario.nombre, {'attr': {'class': 'form-control', 'placeholder': 'Nombre'}}) }}
+		{{ form_row(formulario.apellido, {'attr': {'class': 'form-control', 'placeholder': 'Apellido'}}) }}
+		{{ form_row(formulario.email, {'attr': {'class': 'form-control', 'placeholder': 'Correo Electrónico'}}) }}
+		{{ form_row(formulario.contrasena, {'attr': {'class': 'form-control', 'placeholder': 'Contraseña'}}) }}
+		<button type="submit" class="btn btn-primary">Registrar</button>
+		{{ form_end(formulario) }}
+	</div>
+</div>{% endblock %}

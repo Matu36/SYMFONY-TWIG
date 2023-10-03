@@ -16,10 +16,10 @@ class ComentariosService
         $this->comentariosRepository = $comentariosRepository;
     }
 
-    public function findAllComentariosWithRelations()
+    public function findAllComentarios()
     {
         try {
-            $comentarios = $this->comentariosRepository->findAllCorazonWithRelations();
+            $comentarios = $this->comentariosRepository->findAllComentariosWithRelations();
             return $comentarios;
         } catch (\Exception $e) {
 
@@ -27,10 +27,10 @@ class ComentariosService
         }
     }
 
-    public function findComentariosByIdWithRelations(int $id)
+    public function findComentarioById(int $id)
     {
         try {
-            $comentario = $this->comentariosRepository->findCorazonByIdWithRelations($id);
+            $comentario = $this->comentariosRepository->findComentariosByIdWithRelations($id);
             return $comentario;
         } catch (\Exception $e) {
 

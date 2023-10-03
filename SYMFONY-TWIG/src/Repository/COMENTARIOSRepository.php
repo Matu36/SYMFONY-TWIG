@@ -64,7 +64,7 @@ class COMENTARIOSRepository extends ServiceEntityRepository
     //        ;
     //    }
 
-    public function findAllCorazonWithRelations()
+    public function findAllComentariossWithRelations()
     {
         $qb = $this->createQueryBuilder('com')
             ->leftJoin('com.usuariosComentarios', 'u')
@@ -77,7 +77,7 @@ class COMENTARIOSRepository extends ServiceEntityRepository
         return $qb;
     }
 
-    public function findCorazonByIdWithRelations(int $id)
+    public function findComentariosByIdWithRelations(int $id)
     {
         $qb = $this->createQueryBuilder('com')
             ->andWhere('com.id = :id')

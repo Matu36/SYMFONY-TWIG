@@ -31,7 +31,7 @@ class COMENTARIOSController extends AbstractController
     public function GetComentarios(Request $request): Response
     {
 
-        $comentarios = $this->comentariosService->findAllComentariosWithRelations();
+        $comentarios = $this->comentariosService->findAllComentarios();
 
         $json = $this->serializer->serialize($comentarios, 'json');
 
@@ -57,7 +57,7 @@ class COMENTARIOSController extends AbstractController
      */
     public function getComentariosById(int $id, Request $request): Response
     {
-        $comentarios = $this->comentariosService->findComentariosByIdWithRelations($id);
+        $comentarios = $this->comentariosService->findComentarioById($id);
 
         $json = $this->serializer->serialize($comentarios, 'json');
 

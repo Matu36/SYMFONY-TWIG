@@ -11,6 +11,7 @@ use App\Form\USUARIOSType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use App\Form\LoginFormType;
 
 
 class LandingController extends AbstractController
@@ -70,5 +71,44 @@ class LandingController extends AbstractController
             'formulario' => $formulario->createView(),
         ]);
     }
+
+/**
+ * @Route("/login", name="app_login")
+ */
+public function login(Request $request, AuthenticationUtils $authenticationUtils, UserPasswordEncoderInterface $passwordEncoder)
+{
+    $form = $this->createForm(LoginFormType::class);
+
+    $form->handleRequest($request);
+
+    if ($form->isSubmitted() && $form->isValid()) {
+        // Obtén los datos del formulario
+        $formData = $form->getData();
+
+        // Implementa la lógica de autenticación para verificar las credenciales en la base de datos
+        // Ejemplo: consulta la base de datos para verificar si el usuario y la contraseña coinciden
+        $user = $this->getDoctrine()
+            ->getRepository(USUARIOS::class)
+            ->findOneBy(['email' => $formData->getEmail()]);
+
+        if (!$user || !$this->$passwordEncoder->isPasswordValid($user, $formData->getPassword())) {
+            // Si las credenciales no son válidas, muestra un mensaje de error
+            $this->addFlash('error', 'Credenciales incorrectas');
+        } else {
+            // Autenticar al usuario
+            $token = new UsernamePasswordToken($user, null, 'main', $user->getRoles());
+            $this->tokenStorage->setToken($token);
+            $this->session->set('_security_main', serialize($token));
+            
+            // Redirige al usuario a la página deseada
+            return $this->redirectToRoute('app_muro');
+        }
+    }
+
+    return $this->render('landing/index.html.twig', [
+        'form' => $form->createView(),
+        'error' => $authenticationUtils->getLastAuthenticationError(),
+    ]);
+}
 
 }

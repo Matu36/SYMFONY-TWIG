@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\COMENTARIOSRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=COMENTARIOSRepository::class)
@@ -15,50 +16,65 @@ class COMENTARIOS
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      * @ORM\Column(type="integer")
+     * @Groups({"comentarios"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Groups({"comentarios"})
      */
     private $type_id;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Groups({"comentarios"})
      */
     private $ref_id;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Groups({"comentarios"})
      */
     private $user_id;
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Groups({"comentarios"})
      */
     private $contenido;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Groups({"comentarios"})
      */
     private $comentarios_id;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
+     * @Groups({"comentarios"})
      */
     private $created_at;
 
      /**
      * @ORM\ManyToOne(targetEntity=USUARIOS::class)
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     * @Groups({"comentarios"})
      */
     private $usuariosComentarios;
 
      /**
-     * @ORM\ManyToOne(targetEntity=COMENTARIOS::class)
+     * @ORM\ManyToOne(targetEntity=COMENTARIOS::class, inversedBy="respuestas")
      * @ORM\JoinColumn(name="comentarios_id", referencedColumnName="id")
+     * @Groups({"comentarios"})
      */
     private $comentariosComentarios;
+
+/**
+ * @ORM\OneToMany(targetEntity=COMENTARIOS::class, mappedBy="comentariosComentarios")
+ * @Groups({"comentarios"})
+ */
+  private $respuestas;
 
     public function getId(): ?int
     {
@@ -158,6 +174,16 @@ class COMENTARIOS
         $this->comentariosComentarios = $comentariosComentarios;
         return $this;
     }
+
+    public function getRespuestas()
+{
+    return $this->respuestas;
+}
+
+public function setRespuestas($respuestas)
+{
+    $this->respuestas = $respuestas;
+}
 }
 
 

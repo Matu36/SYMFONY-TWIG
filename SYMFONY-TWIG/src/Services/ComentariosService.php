@@ -19,7 +19,7 @@ class ComentariosService
     public function findAllComentarios()
     {
         try {
-            $comentarios = $this->comentariosRepository->findAllComentariosWithRelations();
+            $comentarios = $this->comentariosRepository->findAllComentariossWithRelations();
             return $comentarios;
         } catch (\Exception $e) {
 

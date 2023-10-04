@@ -33,7 +33,14 @@ class COMENTARIOSController extends AbstractController
 
         $comentarios = $this->comentariosService->findAllComentarios();
 
-        $json = $this->serializer->serialize($comentarios, 'json');
+        $context = [
+            'groups' => ['comentarios'],
+            'circular_reference_limit' => 10, 
+        ];
+
+        $json = $this->serializer->serialize($comentarios, 'json', $context);
+
+        
 
         if (empty($comentarios)) {
 

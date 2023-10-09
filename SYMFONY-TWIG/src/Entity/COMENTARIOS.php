@@ -72,8 +72,7 @@ class COMENTARIOS
 
 /**
  * @ORM\OneToMany(targetEntity=COMENTARIOS::class, mappedBy="comentariosComentarios")
- * @Groups({"comentarios"})
- */
+*/
   private $respuestas;
 
     public function getId(): ?int

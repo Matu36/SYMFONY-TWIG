@@ -36,6 +36,7 @@ class COMENTARIOSController extends AbstractController
         $context = [
             'groups' => ['comentarios'],
             'circular_reference_limit' => 10, 
+            'enable_max_depth' => true,
         ];
 
         $json = $this->serializer->serialize($comentarios, 'json', $context);

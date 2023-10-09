@@ -1,0 +1,40 @@
+# Use an official PHP runtime as a parent image
+FROM php:7.4-fpm
+
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    libfreetype6-dev \
+    libjpeg62-turbo-dev \
+    libpng-dev \
+    libzip-dev \
+    libicu-dev \
+    git \
+    unzip \
+    wget \
+    && docker-php-ext-configure gd --with-freetype --with-jpeg \
+    && docker-php-ext-install -j$(nproc) gd pdo pdo_mysql pdo_pgsql zip intl
+
+# Install Composer globally
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+
+# Set the working directory to /app
+WORKDIR /app
+
+# Copy the current directory contents into the container at /app
+COPY . /app
+
+# Install PHP dependencies using Composer
+RUN composer install
+
+# Expose port 9000 and start php-fpm server
+EXPOSE 9000
+CMD ["php-fpm"]
+
+# Assuming you have PostgreSQL 15 running in another container
+# You should link this container to the PostgreSQL container and configure the Symfony app to use it
+# You can use environment variables or Symfony's .env file to configure the database connection
+
+# For example, if you have a linked PostgreSQL container named "db"
+# You can add environment variables like this in your docker-compose.yml:
+# environment:
+#   DATABASE_URL: postgres://db_user:db_password@db_host:5432/db_name

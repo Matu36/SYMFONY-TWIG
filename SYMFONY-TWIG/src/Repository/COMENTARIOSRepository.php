@@ -68,9 +68,9 @@ class COMENTARIOSRepository extends ServiceEntityRepository
     {
         $qb = $this->createQueryBuilder('com')
             ->leftJoin('com.usuariosComentarios', 'u')
-            ->addSelect('u')
+            ->addSelect('u.nombre', 'u.apellido')
             ->leftJoin('com.comentariosComentarios', 'c')
-            ->addSelect('c')
+            ->addSelect('c.contenido', 'c.ref_id', 'c.user_id', 'c.created_at')
             ->getQuery()
             ->getResult();
 
@@ -88,6 +88,21 @@ class COMENTARIOSRepository extends ServiceEntityRepository
             ->addSelect('c')
             ->getQuery()
             ->getOneOrNullResult();
+
+        return $qb;
+    }
+
+    public function findComentariosByComentarios(int $comentarios_id)
+    {
+        $qb = $this->createQueryBuilder('com')
+            ->andWhere('com.comentarios_id = :comentarios_id')
+            ->setParameter('comentarios_id', $comentarios_id)
+            ->leftJoin('com.usuariosComentarios', 'u')
+            ->addSelect('u.nombre', 'u.apellido')
+            ->leftJoin('com.comentariosComentarios', 'c')
+            ->addSelect('c.contenido', 'c.ref_id', 'c.user_id', 'c.created_at')
+            ->getQuery()
+            ->getArrayResult();
 
         return $qb;
     }

@@ -22,44 +22,38 @@ class COMENTARIOS
 
     /**
      * @ORM\Column(type="integer", nullable=true)
-     * @Groups({"comentarios"})
      */
     private $type_id;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
-     * @Groups({"comentarios"})
      */
     private $ref_id;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
-     * @Groups({"comentarios"})
      */
     private $user_id;
 
     /**
      * @ORM\Column(type="text", nullable=true)
-     * @Groups({"comentarios"})
      */
     private $contenido;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
-     * @Groups({"comentarios"})
      */
     private $comentarios_id;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
-     * @Groups({"comentarios"})
      */
     private $created_at;
 
      /**
      * @ORM\ManyToOne(targetEntity=USUARIOS::class)
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
-     * @Groups({"comentarios"})
+    
      */
     private $usuariosComentarios;
 

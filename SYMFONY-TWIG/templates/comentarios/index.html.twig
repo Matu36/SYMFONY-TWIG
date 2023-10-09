@@ -7,10 +7,17 @@
 	<style></style>
 
 	<div
-		class="example-wrapper">{# <tbody>
+		class="example-wrapper"><tbody>
 						{% for comentario in comentarios %}
-							<tr>
-								<td>{{ comentario.contenido }}</td>
+    <tr>
+        <td>{{ comentario[0].nombre ?? '' }}</td>
+        <td>{{ comentario[0].apellido ?? '' }}</td>
+        <td>{{ comentario[0].contenido ?? '' }}</td>
+        <td>Esto te respondieron!</td>
+        <td>{{ comentario[1].contenido ?? '' }}</td>
+    </tr>
+
+
 						
 								
 			
@@ -18,6 +25,6 @@
 							</tr>
 						</div>
 					{% endfor %}
-				</tbody> #}
+				</tbody>
 	</table>
 </div>{% endblock %}

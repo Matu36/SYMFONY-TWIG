@@ -37,4 +37,14 @@ class ComentariosService
             throw new \Exception('Error al recuperar el Comentarios con relaciones por ID: ' . $e->getMessage());
         }
     }
+    public function findComentarioByComentario(int $comentarios_id)
+    {
+        try {
+            $comentario = $this->comentariosRepository->findComentariosByComentarios($comentarios_id);
+            return $comentario;
+        } catch (\Exception $e) {
+
+            throw new \Exception('Error al recuperar el Comentarios con relaciones por Comentario_ID: ' . $e->getMessage());
+        }
+    }
 }

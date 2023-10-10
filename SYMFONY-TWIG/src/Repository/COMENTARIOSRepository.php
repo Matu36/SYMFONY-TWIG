@@ -67,10 +67,9 @@ class COMENTARIOSRepository extends ServiceEntityRepository
     public function findAllComentariossWithRelations()
     {
         $qb = $this->createQueryBuilder('com')
+            ->addSelect('com.contenido', 'com.id')
             ->leftJoin('com.usuariosComentarios', 'u')
             ->addSelect('u.nombre', 'u.apellido')
-            ->leftJoin('com.comentariosComentarios', 'c')
-            ->addSelect('c.contenido', 'c.ref_id', 'c.user_id', 'c.created_at')
             ->getQuery()
             ->getResult();
 
@@ -78,29 +77,27 @@ class COMENTARIOSRepository extends ServiceEntityRepository
     }
 
     public function findComentariosByIdWithRelations(int $id)
-    {
-        $qb = $this->createQueryBuilder('com')
-            ->andWhere('com.id = :id')
-            ->setParameter('id', $id)
-            ->leftJoin('com.usuariosComentarios', 'u')
-            ->addSelect('u')
-            ->leftJoin('com.comentariosComentarios', 'c')
-            ->addSelect('c')
-            ->getQuery()
-            ->getOneOrNullResult();
+{
+    $qb = $this->createQueryBuilder('come')
+        ->andWhere('come.id = :id')
+        ->setParameter('id', $id)
+        ->addSelect('come.contenido')
+        ->leftJoin('come.usuariosComentarios', 'u')
+        ->addSelect('u.nombre', 'u.apellido')
+        ->getQuery()
+        ->getOneOrNullResult();
 
-        return $qb;
-    }
+    return $qb;
+}
+
 
     public function findComentariosByComentarios(int $comentarios_id)
     {
-        $qb = $this->createQueryBuilder('com')
-            ->andWhere('com.comentarios_id = :comentarios_id')
+        $qb = $this->createQueryBuilder('coment')
+            ->andWhere('coment.comentarios_id = :comentarios_id')
             ->setParameter('comentarios_id', $comentarios_id)
-            ->leftJoin('com.usuariosComentarios', 'u')
+            ->leftJoin('coment.usuariosComentarios', 'u')
             ->addSelect('u.nombre', 'u.apellido')
-            ->leftJoin('com.comentariosComentarios', 'c')
-            ->addSelect('c.contenido', 'c.ref_id', 'c.user_id', 'c.created_at')
             ->getQuery()
             ->getArrayResult();
 

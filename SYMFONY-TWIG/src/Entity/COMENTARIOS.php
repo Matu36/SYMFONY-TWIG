@@ -4,7 +4,7 @@ namespace App\Entity;
 
 use App\Repository\COMENTARIOSRepository;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Serializer\Annotation\Groups;
+
 
 /**
  * @ORM\Entity(repositoryClass=COMENTARIOSRepository::class)
@@ -16,7 +16,6 @@ class COMENTARIOS
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      * @ORM\Column(type="integer")
-     * @Groups({"comentarios"})
      */
     private $id;
 
@@ -60,7 +59,6 @@ class COMENTARIOS
      /**
      * @ORM\ManyToOne(targetEntity=COMENTARIOS::class, inversedBy="respuestas")
      * @ORM\JoinColumn(name="comentarios_id", referencedColumnName="id")
-     * @Groups({"comentarios"})
      */
     private $comentariosComentarios;
 

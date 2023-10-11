@@ -10,7 +10,6 @@ class CustomComentario implements ContextAwareNormalizerInterface
 {
     public function normalize($object, string $format = null, array $context = [])
     {
-
         $respuestasData = [];
 
         // Obtener el comentario principal
@@ -35,11 +34,7 @@ class CustomComentario implements ContextAwareNormalizerInterface
             $respuestasData[] = $respuestaData;
         }
 
-        $Respuestas = [
-            'Respuestas' => $respuestasData,
-        ];
-
-        return $Respuestas;
+        return $respuestasData;
     }
 
     public function supportsNormalization($data, string $format = null, array $context = [])

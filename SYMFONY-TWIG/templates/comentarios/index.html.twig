@@ -8,23 +8,16 @@
 
 	<div
 		class="example-wrapper"><tbody>
-						{% for comentario in comentarios %}
-    <tr>
-        <td>{{ comentario[0].nombre ?? '' }}</td>
-        <td>{{ comentario[0].apellido ?? '' }}</td>
-        <td>{{ comentario[0].contenido ?? '' }}</td>
-        <td>Esto te respondieron!</td>
-        <td>{{ comentario[1].contenido ?? '' }}</td>
-    </tr>
+		{% for key, data in comentarios %}
+		
+        <tr>
+            {% for item in data %}
+    <td>{{ item[0].contenido ?? '' }}</td>
+    <td>{{ item.nombre ?? '' }}</td>
+    <td>{{ item.apellido ?? '' }}</td>
+{% endfor %}
 
-
-						
-								
-			
-			
-							</tr>
-						</div>
-					{% endfor %}
-				</tbody>
-	</table>
-</div>{% endblock %}
+        </tr>
+   
+{% endfor %}
+{% endblock %}
